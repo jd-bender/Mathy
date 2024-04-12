@@ -1,3 +1,3 @@
 export default function Page() {
-    return <h1 clasName="underline">Mathy</h1>
+    return <h1 claName="underline">Mathy</h1>;
 }
