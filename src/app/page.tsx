@@ -1,5 +1,5 @@
 export default function Page() {
     const name = "jake";
-    name = "bob";
+    name = "bobb";
     return <h1 className="underline">Mathy</h1>;
 }
