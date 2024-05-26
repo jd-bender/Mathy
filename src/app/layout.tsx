@@ -7,7 +7,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <head>
                 <title>Mathy</title>
             </head>
-            <body>{children}</body>
+            <body className="bg-palette-2">{children}</body>
         </html>
     );
 }

@@ -112,9 +112,9 @@ export default function Arithmetic({ type, level }) {
 
     return (
         <>
-            <h1>
+            <div>
                 {type} {level}
-            </h1>
+            </div>
             {numbersSet && (
                 <>
                     <span>Correct answer streak: {correctAnswerStreak}</span>
