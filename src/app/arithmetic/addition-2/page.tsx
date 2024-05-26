@@ -1,5 +1,7 @@
-import Addition from "app/components/Addition";
+import Arithmetic from "app/components/Arithmetic";
 
 export default function Page() {
-    return <Addition minNumber={10} maxNumber={99} level={2} />;
+    return (
+        <Arithmetic type="Addition" minNumber={10} maxNumber={99} level={2} />
+    );
 }

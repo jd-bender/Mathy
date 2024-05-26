@@ -1,5 +1,12 @@
-import Subtraction from "app/components/Subtraction";
+import Arithmetic from "app/components/Arithmetic";
 
 export default function Page() {
-    return <Subtraction minNumber={100} maxNumber={999} level={3} />;
+    return (
+        <Arithmetic
+            type="Subtraction"
+            minNumber={100}
+            maxNumber={999}
+            level={3}
+        />
+    );
 }
