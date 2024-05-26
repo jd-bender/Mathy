@@ -4,7 +4,7 @@ import Link from "next/link";
 import { getRandomNumber } from "utilities";
 import { TextField, Button } from "@mui/material";
 
-export default function Arithmetic({ type, minNumber, maxNumber, level }) {
+export default function Arithmetic({ type, level }) {
     const [number1, setNumber1] = useState(null);
     const [operator, setOperator] = useState("");
     const [number2, setNumber2] = useState(null);
@@ -17,6 +17,23 @@ export default function Arithmetic({ type, minNumber, maxNumber, level }) {
     const [showSubmitButton, setShowSubmitButton] = useState(false);
     const [answerInputDisabled, setAnswerInputDisabled] = useState(true);
     const [correctAnswerStreak, setCorrectAnswerStreak] = useState(0);
+
+    let minNumber: number, maxNumber: number;
+
+    switch (level) {
+        case 1:
+            minNumber = 0;
+            maxNumber = 9;
+            break;
+        case 2:
+            minNumber = 10;
+            maxNumber = 99;
+            break;
+        case 3:
+            minNumber = 100;
+            maxNumber = 999;
+            break;
+    }
 
     const resetEquation = useCallback(() => {
         setAnswer("");
@@ -33,6 +50,9 @@ export default function Arithmetic({ type, minNumber, maxNumber, level }) {
                 break;
             case "Subtraction":
                 setOperator("-");
+                break;
+            case "Multiplication":
+                setOperator("x");
                 break;
         }
     }, [type]);
@@ -51,6 +71,9 @@ export default function Arithmetic({ type, minNumber, maxNumber, level }) {
                 break;
             case "Subtraction":
                 isCorrect = number1 - number2 === Number(answer);
+                break;
+            case "Multiplication":
+                isCorrect = number1 * number2 === Number(answer);
                 break;
         }
 

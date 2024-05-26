@@ -8,6 +8,7 @@ export default function Page() {
     const [arithmeticOpen, setArithmeticOpen] = useState(false);
     const [additionOpen, setAdditionOpen] = useState(false);
     const [subtractionOpen, setSubtractionOpen] = useState(false);
+    const [multiplicationOpen, setMultiplicationOpen] = useState(false);
 
     const router = useRouter();
 
@@ -76,6 +77,37 @@ export default function Page() {
                                 router.push("/arithmetic/subtraction-3")
                             }
                             buttonText="Subtraction 3"
+                        />
+                    </Collapse>
+
+                    <NavButton
+                        sx={{ pl: 4 }}
+                        clickAction={() =>
+                            setMultiplicationOpen(!multiplicationOpen)
+                        }
+                        buttonText="Multiplication"
+                    />
+                    <Collapse in={multiplicationOpen}>
+                        <NavButton
+                            sx={{ pl: 8 }}
+                            clickAction={() =>
+                                router.push("/arithmetic/multiplication-1")
+                            }
+                            buttonText="Multiplication 1"
+                        />
+                        <NavButton
+                            sx={{ pl: 8 }}
+                            clickAction={() =>
+                                router.push("/arithmetic/multiplication-2")
+                            }
+                            buttonText="Multiplication 2"
+                        />
+                        <NavButton
+                            sx={{ pl: 8 }}
+                            clickAction={() =>
+                                router.push("/arithmetic/multiplication-3")
+                            }
+                            buttonText="Multiplication 3"
                         />
                     </Collapse>
                 </Collapse>
