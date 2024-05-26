@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { List, Collapse } from "@mui/material";
+import { Box, List, Collapse } from "@mui/material";
 import NavButton from "./components/NavButton";
 import { useRouter } from "next/navigation";
 
@@ -14,18 +14,24 @@ export default function Page() {
 
     return (
         <>
-            <h1>home page</h1>
+            <Box className="w-full h-12 flex justify-center items-center bg-palette-1">
+                <span className="text-xl">Mathy</span>
+            </Box>
 
             <List>
                 <NavButton
                     clickAction={() => setArithmeticOpen(!arithmeticOpen)}
                     buttonText="Arithmetic"
+                    controlsCollapse={true}
+                    collapseOpen={arithmeticOpen}
                 />
                 <Collapse in={arithmeticOpen}>
                     <NavButton
                         sx={{ pl: 4 }}
                         clickAction={() => setAdditionOpen(!additionOpen)}
                         buttonText="Addition"
+                        controlsCollapse={true}
+                        collapseOpen={additionOpen}
                     />
                     <Collapse in={additionOpen}>
                         <NavButton
@@ -55,6 +61,8 @@ export default function Page() {
                         sx={{ pl: 4 }}
                         clickAction={() => setSubtractionOpen(!subtractionOpen)}
                         buttonText="Subtraction"
+                        controlsCollapse={true}
+                        collapseOpen={subtractionOpen}
                     />
                     <Collapse in={subtractionOpen}>
                         <NavButton
@@ -86,6 +94,8 @@ export default function Page() {
                             setMultiplicationOpen(!multiplicationOpen)
                         }
                         buttonText="Multiplication"
+                        controlsCollapse={true}
+                        collapseOpen={multiplicationOpen}
                     />
                     <Collapse in={multiplicationOpen}>
                         <NavButton
