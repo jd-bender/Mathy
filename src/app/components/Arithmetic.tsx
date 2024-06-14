@@ -10,13 +10,14 @@ export default function Arithmetic({ type, level }) {
     const [number2, setNumber2] = useState(null);
     const [answer, setAnswer] = useState("");
     const [numbersSet, setNumbersSet] = useState(false);
-    const [displayAnswerCorrectMessage, setDisplayAnswerCorrectMessage] =
-        useState(false);
     const [displayAnswerIncorrectMessage, setDisplayAnswerIncorrectMessage] =
         useState(false);
     const [showSubmitButton, setShowSubmitButton] = useState(false);
     const [answerInputDisabled, setAnswerInputDisabled] = useState(true);
     const [correctAnswerStreak, setCorrectAnswerStreak] = useState(0);
+    const [showAnswerStatusMessage, setShowAnswerStatusMessage] =
+        useState(false);
+    const [answerStatusMessage, setAnswerStatusMessage] = useState("Correct!");
 
     let minNumber: number, maxNumber: number;
 
@@ -81,26 +82,27 @@ export default function Arithmetic({ type, level }) {
             setCorrectAnswerStreak(
                 (correctAnswerStreak) => correctAnswerStreak + 1,
             );
-            setDisplayAnswerIncorrectMessage(false);
-            setDisplayAnswerCorrectMessage(true);
+            setAnswerStatusMessage("Correct!");
+            setShowAnswerStatusMessage(true);
         } else {
             setCorrectAnswerStreak(0);
-            setDisplayAnswerIncorrectMessage(true);
+            setAnswerStatusMessage("Incorrect.");
+            setShowAnswerStatusMessage(true);
         }
     };
 
     useEffect(() => {
-        if (displayAnswerCorrectMessage) {
+        if (showAnswerStatusMessage) {
             setShowSubmitButton(false);
             setAnswerInputDisabled(true);
 
             setTimeout(() => {
-                setDisplayAnswerCorrectMessage(false);
+                setShowAnswerStatusMessage(false);
                 resetEquation();
                 setShowSubmitButton(true);
             }, 3000);
         }
-    }, [displayAnswerCorrectMessage, resetEquation]);
+    }, [showAnswerStatusMessage, resetEquation]);
 
     useEffect(() => {
         if (displayAnswerIncorrectMessage) {
@@ -111,30 +113,48 @@ export default function Arithmetic({ type, level }) {
     }, [displayAnswerIncorrectMessage]);
 
     return (
-        <>
+        <span className="relative block">
             <div>
                 {type} {level}
             </div>
             {numbersSet && (
                 <>
-                    <span>Correct answer streak: {correctAnswerStreak}</span>
-                    <div>
+                    <div className="my-2">
+                        Correct answer streak: {correctAnswerStreak}
+                    </div>
+                    <div className="mb-2">
                         {number1} {operator} {number2} = ?
                     </div>
-                    {displayAnswerCorrectMessage && <h1>Correct!</h1>}
-                    {displayAnswerIncorrectMessage && <h1>Incorrect.</h1>}
-                    <TextField
-                        value={answer}
-                        onChange={(e) => setAnswer(e.target.value)}
-                        disabled={answerInputDisabled}
-                    />
-                    {showSubmitButton && (
-                        <Button onClick={submitAnswer}>Submit Answer</Button>
-                    )}
+                    <h1
+                        className={
+                            showAnswerStatusMessage ? "visible" : "invisible"
+                        }
+                    >
+                        {answerStatusMessage}
+                    </h1>
+                    <div className="flex justify-start gap-4">
+                        <TextField
+                            value={answer}
+                            onChange={(e) => setAnswer(e.target.value)}
+                            disabled={answerInputDisabled}
+                            className="mr-2"
+                        />
+                        {showSubmitButton && (
+                            <Button
+                                onClick={submitAnswer}
+                                variant="contained"
+                                disabled={!answer}
+                            >
+                                Submit Answer
+                            </Button>
+                        )}
+                    </div>
                 </>
             )}
 
-            <Link href="/">Home</Link>
-        </>
+            <Link href="/" className="absolute bottom-0 right-0">
+                Return
+            </Link>
+        </span>
     );
 }

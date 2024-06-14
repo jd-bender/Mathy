@@ -11,7 +11,7 @@ export default function NavButton({
 }) {
     return (
         <ListItem sx={sx} onClick={clickAction}>
-            <ListItemButton>
+            <ListItemButton sx={{ background: "#D2DAFF", borderRadius: "5px" }}>
                 <ListItemText primary={buttonText} />
                 {controlsCollapse &&
                     (collapseOpen ? <ExpandLess /> : <ExpandMore />)}
