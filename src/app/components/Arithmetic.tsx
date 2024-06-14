@@ -38,11 +38,36 @@ export default function Arithmetic({ type, level }) {
 
     const resetEquation = useCallback(() => {
         setAnswer("");
-        setNumber1(getRandomNumber(minNumber, maxNumber));
-        setNumber2(getRandomNumber(minNumber, maxNumber));
+
+        if (type !== "Division") {
+            setNumber1(getRandomNumber(minNumber, maxNumber));
+            setNumber2(getRandomNumber(minNumber, maxNumber));
+        } else {
+            let num1: number, num2: number;
+
+            let numbersFound = false;
+
+            while (!numbersFound) {
+                num1 = getRandomNumber(minNumber, maxNumber);
+                num2 = getRandomNumber(minNumber, maxNumber);
+
+                if (
+                    num1 % num2 === 0 &&
+                    num1 !== num2 &&
+                    num1 !== 0 &&
+                    num2 !== 1
+                ) {
+                    numbersFound = true;
+                }
+            }
+
+            setNumber1(num1);
+            setNumber2(num2);
+        }
+
         setShowSubmitButton(true);
         setAnswerInputDisabled(false);
-    }, [minNumber, maxNumber]);
+    }, [type, minNumber, maxNumber]);
 
     useEffect(() => {
         switch (type) {
@@ -54,6 +79,9 @@ export default function Arithmetic({ type, level }) {
                 break;
             case "Multiplication":
                 setOperator("x");
+                break;
+            case "Division":
+                setOperator("/");
                 break;
         }
     }, [type]);
@@ -75,6 +103,9 @@ export default function Arithmetic({ type, level }) {
                 break;
             case "Multiplication":
                 isCorrect = number1 * number2 === Number(answer);
+                break;
+            case "Division":
+                isCorrect = number1 / number2 === Number(answer);
                 break;
         }
 

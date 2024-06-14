@@ -9,6 +9,7 @@ export default function Page() {
     const [additionOpen, setAdditionOpen] = useState(false);
     const [subtractionOpen, setSubtractionOpen] = useState(false);
     const [multiplicationOpen, setMultiplicationOpen] = useState(false);
+    const [divisionOpen, setDivisionOpen] = useState(false);
 
     const router = useRouter();
 
@@ -113,6 +114,37 @@ export default function Page() {
                             router.push("/arithmetic/multiplication-3")
                         }
                         buttonText="Multiplication 3"
+                    />
+                </Collapse>
+
+                <NavButton
+                    sx={{ pl: 4 }}
+                    clickAction={() => setDivisionOpen(!divisionOpen)}
+                    buttonText="Division"
+                    controlsCollapse={true}
+                    collapseOpen={divisionOpen}
+                />
+                <Collapse in={divisionOpen}>
+                    <NavButton
+                        sx={{ pl: 8 }}
+                        clickAction={() =>
+                            router.push("/arithmetic/division-1")
+                        }
+                        buttonText="Division 1"
+                    />
+                    <NavButton
+                        sx={{ pl: 8 }}
+                        clickAction={() =>
+                            router.push("/arithmetic/division-2")
+                        }
+                        buttonText="Division 2"
+                    />
+                    <NavButton
+                        sx={{ pl: 8 }}
+                        clickAction={() =>
+                            router.push("/arithmetic/division-3")
+                        }
+                        buttonText="Division 3"
                     />
                 </Collapse>
             </Collapse>
