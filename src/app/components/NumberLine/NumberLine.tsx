@@ -1,18 +1,21 @@
-import { useState } from "react";
 import Arrow from "./Arrow";
 import Line from "./Line";
 import Notch from "./Notch";
 
-export default function NumberLine({ start, end }) {
-    const [startPosition] = useState(start);
-    const [endPosition] = useState(end);
-
+export default function NumberLine({ startPosition, endPosition }) {
     const notches = [];
 
     notches.push(<Arrow direction="left" key={startPosition - 1} />);
 
     for (let i = startPosition; i <= endPosition; i++) {
-        notches.push(<Notch position={i} key={i} />);
+        notches.push(
+            <Notch
+                position={i}
+                isStartPosition={i === startPosition}
+                isEndPosition={i === endPosition}
+                key={i}
+            />,
+        );
     }
 
     notches.push(<Arrow direction="right" key={endPosition + 1} />);

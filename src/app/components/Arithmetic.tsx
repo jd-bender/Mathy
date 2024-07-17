@@ -160,7 +160,9 @@ export default function Arithmetic({ type, level }) {
             </div>
             {numbersSet && (
                 <>
-                    {showExplanation && <NumberLine start={0} end={8} />}
+                    {showExplanation && (
+                        <NumberLine startPosition={0} endPosition={8} />
+                    )}
 
                     <div className="my-2">
                         Correct answer streak: {correctAnswerStreak}
