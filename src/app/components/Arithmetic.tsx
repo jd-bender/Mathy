@@ -2,7 +2,10 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { getRandomNumber } from "utilities";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Tooltip } from "@mui/material";
+import HelpIcon from "@mui/icons-material/Help";
+
+import NumberLine from "./NumberLine/NumberLine";
 
 export default function Arithmetic({ type, level }) {
     const [number1, setNumber1] = useState(null);
@@ -10,6 +13,7 @@ export default function Arithmetic({ type, level }) {
     const [number2, setNumber2] = useState(null);
     const [answer, setAnswer] = useState("");
     const [numbersSet, setNumbersSet] = useState(false);
+    const [showExplanation, setShowExplanation] = useState(false);
     const [displayAnswerIncorrectMessage, setDisplayAnswerIncorrectMessage] =
         useState(false);
     const [showSubmitButton, setShowSubmitButton] = useState(false);
@@ -146,10 +150,18 @@ export default function Arithmetic({ type, level }) {
     return (
         <span className="relative block">
             <div>
-                {type} {level}
+                {type} {level}{" "}
+                <Tooltip title="Explanation">
+                    <HelpIcon
+                        className="cursor-pointer"
+                        onClick={() => setShowExplanation(true)}
+                    />
+                </Tooltip>
             </div>
             {numbersSet && (
                 <>
+                    {showExplanation && <NumberLine start={0} end={2} />}
+
                     <div className="my-2">
                         Correct answer streak: {correctAnswerStreak}
                     </div>
