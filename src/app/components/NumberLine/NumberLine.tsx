@@ -13,9 +13,9 @@ export default function NumberLine({ start, end }) {
     }
 
     return (
-        <span className="inline-block">
+        <span className="inline-block w-28">
             <Line />
-            <span className="flex flex-row space-x-4">{notches}</span>
+            <span className="flex flex-row justify-evenly">{notches}</span>
         </span>
     );
 }
