@@ -183,6 +183,7 @@ export default function Arithmetic({ type, level }) {
                             onChange={(e) => setAnswer(e.target.value)}
                             disabled={answerInputDisabled}
                             className="mr-2"
+                            autoComplete="off"
                         />
                         {showSubmitButton && (
                             <Button
