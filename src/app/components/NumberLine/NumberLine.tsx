@@ -2,12 +2,12 @@ import Arrow from "./Arrow";
 import Line from "./Line";
 import Notch from "./Notch";
 
-export default function NumberLine({ startPosition, endPosition }) {
+export default function NumberLine({ range, startPosition, endPosition }) {
     const notches = [];
 
-    notches.push(<Arrow direction="left" key={startPosition - 1} />);
+    notches.push(<Arrow direction="left" key={range[0] - 1} />);
 
-    for (let i = startPosition; i <= endPosition; i++) {
+    for (let i = range[0]; i <= range[1]; i++) {
         notches.push(
             <Notch
                 position={i}
@@ -18,7 +18,7 @@ export default function NumberLine({ startPosition, endPosition }) {
         );
     }
 
-    notches.push(<Arrow direction="right" key={endPosition + 1} />);
+    notches.push(<Arrow direction="right" key={range[1] + 1} />);
 
     return (
         <>

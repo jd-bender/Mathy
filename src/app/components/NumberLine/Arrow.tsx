@@ -3,7 +3,7 @@ export default function Arrow({ direction }) {
 
     return (
         <span
-            className={`border-solid border-black border-r-4 border-b-4 block p-1 w-1 h-1 relative top-0.5 ${rotation}`}
+            className={`border-solid border-black border-r-4 border-b-4 block p-1 w-1 h-1 relative top-[.85rem] ${rotation}`}
         ></span>
     );
 }

@@ -13,6 +13,8 @@ export default function Arithmetic({ type, level }) {
     const [number2, setNumber2] = useState(null);
     const [answer, setAnswer] = useState("");
     const [numbersSet, setNumbersSet] = useState(false);
+    const [numberLineRangeStart, setNumberLineRangeStart] = useState(null);
+    const [numberLineRangeEnd, setNumberLineRangeEnd] = useState(null);
     const [showExplanation, setShowExplanation] = useState(false);
     const [displayAnswerIncorrectMessage, setDisplayAnswerIncorrectMessage] =
         useState(false);
@@ -44,8 +46,21 @@ export default function Arithmetic({ type, level }) {
         setAnswer("");
 
         if (type !== "Division") {
-            setNumber1(getRandomNumber(minNumber, maxNumber));
-            setNumber2(getRandomNumber(minNumber, maxNumber));
+            const num1 = getRandomNumber(minNumber, maxNumber);
+            const num2 = getRandomNumber(minNumber, maxNumber);
+
+            setNumber1(num1);
+            setNumber2(num2);
+
+            const rangeGap = 4;
+
+            if (num1 - rangeGap < 0) {
+                setNumberLineRangeStart(0);
+            } else {
+                setNumberLineRangeStart(num1 - rangeGap);
+            }
+
+            setNumberLineRangeEnd(num1 + num2 + rangeGap);
         } else {
             let num1: number, num2: number;
 
@@ -154,14 +169,18 @@ export default function Arithmetic({ type, level }) {
                 <Tooltip title="Explanation">
                     <HelpIcon
                         className="cursor-pointer"
-                        onClick={() => setShowExplanation(true)}
+                        onClick={() => setShowExplanation(!showExplanation)}
                     />
                 </Tooltip>
             </div>
             {numbersSet && (
                 <>
                     {showExplanation && (
-                        <NumberLine startPosition={0} endPosition={8} />
+                        <NumberLine
+                            range={[numberLineRangeStart, numberLineRangeEnd]}
+                            startPosition={number1}
+                            endPosition={number1 + number2}
+                        />
                     )}
 
                     <div className="my-2">
