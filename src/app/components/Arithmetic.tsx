@@ -141,6 +141,8 @@ export default function Arithmetic({ type, level }) {
         }
     };
 
+    const responseTime = 1000;
+
     useEffect(() => {
         if (showAnswerStatusMessage) {
             setShowSubmitButton(false);
@@ -150,7 +152,7 @@ export default function Arithmetic({ type, level }) {
                 setShowAnswerStatusMessage(false);
                 resetEquation();
                 setShowSubmitButton(true);
-            }, 3000);
+            }, responseTime);
         }
     }, [showAnswerStatusMessage, resetEquation]);
 
@@ -158,7 +160,7 @@ export default function Arithmetic({ type, level }) {
         if (displayAnswerIncorrectMessage) {
             setTimeout(() => {
                 setDisplayAnswerIncorrectMessage(false);
-            }, 3000);
+            }, responseTime);
         }
     }, [displayAnswerIncorrectMessage]);
 
