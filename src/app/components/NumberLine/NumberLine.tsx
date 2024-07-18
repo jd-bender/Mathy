@@ -3,28 +3,34 @@ import Line from "./Line";
 import Notch from "./Notch";
 
 export default function NumberLine({ range, startPosition, endPosition }) {
-    const notches = [];
+    const segments = [];
 
-    notches.push(<Arrow direction="left" key={range[0] - 1} />);
+    segments.push(
+        <Arrow direction="left" isRangeEnder={false} key={range[0] - 1} />,
+    );
 
     for (let i = range[0]; i <= range[1]; i++) {
-        notches.push(
+        segments.push(
             <Notch
                 position={i}
                 isStartPosition={i === startPosition}
                 isEndPosition={i === endPosition}
+                inRange={i >= startPosition && i < endPosition}
+                lastInRange={i === endPosition - 1}
                 key={i}
             />,
         );
     }
 
-    notches.push(<Arrow direction="right" key={range[1] + 1} />);
+    segments.push(
+        <Arrow direction="right" isRangeEnder={false} key={range[1] + 1} />,
+    );
 
     return (
         <>
             <span className="inline-block">
                 <Line />
-                <span className="flex flex-row">{notches}</span>
+                <span className="flex">{segments}</span>
             </span>
         </>
     );
