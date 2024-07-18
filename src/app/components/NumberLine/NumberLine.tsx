@@ -2,7 +2,12 @@ import Arrow from "./Arrow";
 import Line from "./Line";
 import Notch from "./Notch";
 
-export default function NumberLine({ range, startPosition, endPosition }) {
+export default function NumberLine({
+    range,
+    startPosition,
+    endPosition,
+    modifier,
+}) {
     const segments = [];
 
     segments.push(
@@ -17,6 +22,7 @@ export default function NumberLine({ range, startPosition, endPosition }) {
                 isEndPosition={i === endPosition}
                 inRange={i >= startPosition && i < endPosition}
                 lastInRange={i === endPosition - 1}
+                modifier={modifier}
                 key={i}
             />,
         );

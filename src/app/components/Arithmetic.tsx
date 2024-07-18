@@ -183,6 +183,7 @@ export default function Arithmetic({ type, level }) {
                             range={[numberLineRangeStart, numberLineRangeEnd]}
                             startPosition={number1}
                             endPosition={number1 + number2}
+                            modifier={number2}
                         />
                     )}
 
