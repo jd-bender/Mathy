@@ -86,6 +86,7 @@ export default function Arithmetic({ type, level }) {
 
         setShowSubmitButton(true);
         setAnswerInputDisabled(false);
+        setShowExplanation(false);
     }, [type, minNumber, maxNumber]);
 
     useEffect(() => {
