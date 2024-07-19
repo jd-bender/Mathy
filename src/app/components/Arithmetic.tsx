@@ -181,6 +181,7 @@ export default function Arithmetic({ type, level }) {
                     {showExplanation && (
                         <NumberLine
                             range={[numberLineRangeStart, numberLineRangeEnd]}
+                            explanationMode={true}
                             startPosition={number1}
                             endPosition={number1 + number2}
                             modifier={number2}
@@ -193,6 +194,10 @@ export default function Arithmetic({ type, level }) {
                     <div className="mb-2">
                         {number1} {operator} {number2} = ?
                     </div>
+                    <NumberLine
+                        range={[numberLineRangeStart, numberLineRangeEnd]}
+                        explanationMode={false}
+                    />
                     <h1
                         className={
                             showAnswerStatusMessage ? "visible" : "invisible"

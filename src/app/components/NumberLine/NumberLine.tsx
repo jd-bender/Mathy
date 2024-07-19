@@ -2,12 +2,21 @@ import Arrow from "./Arrow";
 import Line from "./Line";
 import Notch from "./Notch";
 
+type NumberLineProps = {
+    range: Array<number>;
+    explanationMode: boolean;
+    startPosition?: number;
+    endPosition?: number;
+    modifier?: number;
+};
+
 export default function NumberLine({
     range,
+    explanationMode,
     startPosition,
     endPosition,
     modifier,
-}) {
+}: NumberLineProps) {
     const segments = [];
 
     segments.push(
@@ -18,6 +27,7 @@ export default function NumberLine({
         segments.push(
             <Notch
                 position={i}
+                explanationMode={explanationMode}
                 isStartPosition={i === startPosition}
                 isEndPosition={i === endPosition}
                 inRange={i >= startPosition && i < endPosition}
