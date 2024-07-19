@@ -1,15 +1,21 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 type DotProps = {
     explanationMode: boolean;
-    autoSelected?: boolean;
+    autoSelected: boolean;
 };
 
 export default function Dot({ explanationMode, autoSelected }: DotProps) {
     const [selected, setSelected] = useState(
         explanationMode ? autoSelected : false,
     );
+
+    useEffect(() => {
+        if (!explanationMode) {
+            console.log("selected changed: " + selected);
+        }
+    }, [explanationMode, selected]);
 
     const showOnHover = "opacity-0 hover:opacity-100";
 

@@ -1,6 +1,16 @@
 import Dot from "./Dot";
 import Arrow from "./Arrow";
 
+type NotchProps = {
+    position: number;
+    explanationMode: boolean;
+    isStartPosition: boolean;
+    isEndPosition: boolean;
+    inRange: boolean;
+    lastInRange: boolean;
+    modifier: number;
+};
+
 export default function Notch({
     position,
     explanationMode,
@@ -9,7 +19,7 @@ export default function Notch({
     inRange,
     lastInRange,
     modifier,
-}) {
+}: NotchProps) {
     return (
         <span className="flex flex-col items-center relative">
             <Dot

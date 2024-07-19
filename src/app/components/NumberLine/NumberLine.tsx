@@ -1,5 +1,4 @@
 import Arrow from "./Arrow";
-import Line from "./Line";
 import Notch from "./Notch";
 
 type NumberLineProps = {
@@ -43,11 +42,9 @@ export default function NumberLine({
     );
 
     return (
-        <>
-            <span className="inline-block">
-                <Line />
-                <span className="flex">{segments}</span>
-            </span>
-        </>
+        <span className="inline-block">
+            <span className="bg-black h-1 block relative top-2.5"></span>
+            <span className="flex">{segments}</span>
+        </span>
     );
 }

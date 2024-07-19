@@ -1,4 +1,9 @@
-export default function Arrow({ direction, isRangeEnder }) {
+type ArrowProps = {
+    direction: string;
+    isRangeEnder: boolean;
+};
+
+export default function Arrow({ direction, isRangeEnder }: ArrowProps) {
     const rotation = direction === "left" ? "rotate-[135deg]" : "-rotate-45";
     const position = isRangeEnder
         ? "border-green-500 absolute left-6"
