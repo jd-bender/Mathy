@@ -5,6 +5,7 @@ import { getRandomNumber } from "utilities";
 import { TextField, Button, Tooltip } from "@mui/material";
 import HelpIcon from "@mui/icons-material/Help";
 
+import { ResetContext } from "app/contexts/resetContext";
 import NumberLine from "app/components/NumberLine/NumberLine";
 
 export default function Page() {
@@ -130,11 +131,13 @@ export default function Page() {
                     <div className="mb-2">
                         {number1} + {number2} = ?
                     </div>
-                    <NumberLine
-                        range={[numberLineRangeStart, numberLineRangeEnd]}
-                        explanationMode={false}
-                        resetState={resetState}
-                    />
+                    <ResetContext.Provider value={resetState}>
+                        <NumberLine
+                            range={[numberLineRangeStart, numberLineRangeEnd]}
+                            explanationMode={false}
+                        />
+                    </ResetContext.Provider>
+
                     <h1
                         className={
                             showAnswerStatusMessage ? "visible" : "invisible"

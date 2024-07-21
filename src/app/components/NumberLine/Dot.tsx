@@ -1,5 +1,6 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { ResetContext } from "app/contexts/resetContext";
 
 type DotProps = {
     explanationMode: boolean;
@@ -7,27 +8,17 @@ type DotProps = {
     resetState?: boolean;
 };
 
-export default function Dot({
-    explanationMode,
-    autoSelected,
-    resetState,
-}: DotProps) {
+export default function Dot({ explanationMode, autoSelected }: DotProps) {
     const [selected, setSelected] = useState(
         explanationMode ? autoSelected : false,
     );
-    const [resetSignal] = useState(!!resetState);
+    const resetSignal = useContext(ResetContext);
 
     useEffect(() => {
         if (resetSignal) {
             setSelected(false);
         }
     }, [resetSignal]);
-
-    useEffect(() => {
-        if (!explanationMode) {
-            console.log("selected changed: " + selected);
-        }
-    }, [explanationMode, selected]);
 
     const showOnHover = "opacity-0 hover:opacity-100";
 
