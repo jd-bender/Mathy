@@ -20,12 +20,18 @@ export default function Dot({ explanationMode, autoSelected }: DotProps) {
         }
     }, [resetSignal]);
 
+    const color = selected ? "bg-green-500" : "bg-green-400";
     const showOnHover = "opacity-0 hover:opacity-100";
+    const visible = selected
+        ? "opacity-100"
+        : explanationMode
+          ? "opacity-0"
+          : showOnHover;
 
     return (
         <span
             onClick={() => !explanationMode && setSelected(!selected)}
-            className={`h-3 w-3 bg-green-500 rounded-full absolute top-0.5 ${selected ? "opacity-100" : explanationMode ? "opacity-0" : showOnHover}`}
+            className={`h-3 w-3 ${color} rounded-full absolute top-0.5 ${visible}`}
         ></span>
     );
 }
