@@ -7,6 +7,7 @@ type NumberLineProps = {
     startPosition?: number;
     endPosition?: number;
     modifier?: number;
+    resetState?: boolean;
 };
 
 export default function NumberLine({
@@ -15,9 +16,10 @@ export default function NumberLine({
     startPosition,
     endPosition,
     modifier,
+    resetState,
 }: NumberLineProps) {
     const segments = [];
-
+    console.log("resetState in numberline: " + resetState);
     segments.push(
         <Arrow direction="left" isRangeEnder={false} key={range[0] - 1} />,
     );
@@ -32,6 +34,7 @@ export default function NumberLine({
                 inRange={i >= startPosition && i < endPosition}
                 lastInRange={i === endPosition - 1}
                 modifier={modifier}
+                resetState={resetState}
                 key={i}
             />,
         );

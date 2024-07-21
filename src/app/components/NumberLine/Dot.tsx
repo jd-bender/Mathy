@@ -4,12 +4,24 @@ import { useState, useEffect } from "react";
 type DotProps = {
     explanationMode: boolean;
     autoSelected: boolean;
+    resetState?: boolean;
 };
 
-export default function Dot({ explanationMode, autoSelected }: DotProps) {
+export default function Dot({
+    explanationMode,
+    autoSelected,
+    resetState,
+}: DotProps) {
     const [selected, setSelected] = useState(
         explanationMode ? autoSelected : false,
     );
+    const [resetSignal] = useState(!!resetState);
+
+    useEffect(() => {
+        if (resetSignal) {
+            setSelected(false);
+        }
+    }, [resetSignal]);
 
     useEffect(() => {
         if (!explanationMode) {

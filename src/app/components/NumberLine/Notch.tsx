@@ -9,6 +9,7 @@ type NotchProps = {
     inRange: boolean;
     lastInRange: boolean;
     modifier: number;
+    resetState?: boolean;
 };
 
 export default function Notch({
@@ -19,12 +20,15 @@ export default function Notch({
     inRange,
     lastInRange,
     modifier,
+    resetState,
 }: NotchProps) {
+    console.log("resetState in notch: " + resetState);
     return (
         <span className="flex flex-col items-center relative">
             <Dot
                 explanationMode={explanationMode}
                 autoSelected={isStartPosition || isEndPosition}
+                resetState={resetState}
             />
 
             {explanationMode && (
