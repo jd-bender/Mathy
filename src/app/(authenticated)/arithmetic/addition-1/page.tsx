@@ -9,30 +9,13 @@ import ResetContext from "app/contexts/resetContext";
 import NumberLine from "app/components/NumberLine/NumberLine";
 
 export default function Page() {
-    const minNumber = 0,
-        maxNumber = 9;
-    const rangeGap = 4;
-    const num1 = getRandomNumber(minNumber, maxNumber);
-    const num2 = getRandomNumber(minNumber, maxNumber);
-
-    const [number1, setNumber1] = useState(num1);
-    const [number2, setNumber2] = useState(num2);
+    const [number1, setNumber1] = useState(null);
+    const [number2, setNumber2] = useState(null);
     const [answer, setAnswer] = useState("");
-    const [numbersSet] = useState(true);
 
-    let rangeStart: number;
-
-    if (num1 - rangeGap < 0) {
-        rangeStart = 0;
-    } else {
-        rangeStart = num1 - rangeGap;
-    }
-
-    const [numberLineRangeStart, setNumberLineRangeStart] =
-        useState(rangeStart);
-    const [numberLineRangeEnd, setNumberLineRangeEnd] = useState(
-        num1 + num2 + rangeGap,
-    );
+    const [numberLineRangeStart, setNumberLineRangeStart] = useState(null);
+    const [numberLineRangeEnd, setNumberLineRangeEnd] = useState(null);
+    const [numbersSet, setNumbersSet] = useState(false);
     const [showExplanation, setShowExplanation] = useState(false);
     const [displayAnswerIncorrectMessage, setDisplayAnswerIncorrectMessage] =
         useState(false);
@@ -44,7 +27,27 @@ export default function Page() {
     const [answerStatusMessage, setAnswerStatusMessage] = useState("Correct!");
     const [resetState, setResetState] = useState(false);
 
+    const minNumber = 0,
+        maxNumber = 9;
+    const rangeGap = 4;
     const responseTime = 1000;
+
+    useEffect(() => {
+        const num1 = getRandomNumber(minNumber, maxNumber);
+        const num2 = getRandomNumber(minNumber, maxNumber);
+
+        setNumber1(num1);
+        setNumber2(num2);
+
+        if (num1 - rangeGap < 0) {
+            setNumberLineRangeStart(0);
+        } else {
+            setNumberLineRangeStart(num1 - rangeGap);
+        }
+
+        setNumberLineRangeEnd(num1 + num2 + rangeGap);
+        setNumbersSet(true);
+    }, []);
 
     const resetEquation = () => {
         setAnswer("");
@@ -70,7 +73,7 @@ export default function Page() {
 
         setTimeout(() => {
             setResetState(false);
-        }, 1000);
+        }, responseTime);
     };
 
     const submitAnswer = () => {
@@ -117,21 +120,21 @@ export default function Page() {
                     />
                 </Tooltip>
             </div>
+            {showExplanation && (
+                <NumberLine
+                    range={[numberLineRangeStart, numberLineRangeEnd]}
+                    explanationMode={true}
+                    startPosition={number1}
+                    endPosition={number1 + number2}
+                    modifier={number2}
+                />
+            )}
+
+            <div className="my-2">
+                Correct answer streak: {correctAnswerStreak}
+            </div>
             {numbersSet && (
                 <>
-                    {showExplanation && (
-                        <NumberLine
-                            range={[numberLineRangeStart, numberLineRangeEnd]}
-                            explanationMode={true}
-                            startPosition={number1}
-                            endPosition={number1 + number2}
-                            modifier={number2}
-                        />
-                    )}
-
-                    <div className="my-2">
-                        Correct answer streak: {correctAnswerStreak}
-                    </div>
                     <div className="mb-2">
                         {number1} + {number2} = ?
                     </div>
@@ -141,34 +144,30 @@ export default function Page() {
                             explanationMode={false}
                         />
                     </ResetContext.Provider>
-
-                    <h1
-                        className={
-                            showAnswerStatusMessage ? "visible" : "invisible"
-                        }
-                    >
-                        {answerStatusMessage}
-                    </h1>
-                    <div className="flex justify-start gap-4">
-                        <TextField
-                            value={answer}
-                            onChange={(e) => setAnswer(e.target.value)}
-                            disabled={answerInputDisabled}
-                            className="mr-2"
-                            autoComplete="off"
-                        />
-                        {showSubmitButton && (
-                            <Button
-                                onClick={submitAnswer}
-                                variant="contained"
-                                disabled={!answer}
-                            >
-                                Submit Answer
-                            </Button>
-                        )}
-                    </div>
                 </>
             )}
+
+            <h1 className={showAnswerStatusMessage ? "visible" : "invisible"}>
+                {answerStatusMessage}
+            </h1>
+            <div className="flex justify-start gap-4">
+                <TextField
+                    value={answer}
+                    onChange={(e) => setAnswer(e.target.value)}
+                    disabled={answerInputDisabled}
+                    className="mr-2"
+                    autoComplete="off"
+                />
+                {showSubmitButton && (
+                    <Button
+                        onClick={submitAnswer}
+                        variant="contained"
+                        disabled={!answer}
+                    >
+                        Submit Answer
+                    </Button>
+                )}
+            </div>
 
             <Link href="/" className="absolute bottom-0 right-0">
                 Return
