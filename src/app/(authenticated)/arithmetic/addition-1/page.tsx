@@ -12,13 +12,27 @@ export default function Page() {
     const minNumber = 0,
         maxNumber = 9;
     const rangeGap = 4;
+    const num1 = getRandomNumber(minNumber, maxNumber);
+    const num2 = getRandomNumber(minNumber, maxNumber);
 
-    const [number1, setNumber1] = useState(null);
-    const [number2, setNumber2] = useState(null);
+    const [number1, setNumber1] = useState(num1);
+    const [number2, setNumber2] = useState(num2);
     const [answer, setAnswer] = useState("");
     const [numbersSet, setNumbersSet] = useState(false);
-    const [numberLineRangeStart, setNumberLineRangeStart] = useState(null);
-    const [numberLineRangeEnd, setNumberLineRangeEnd] = useState(null);
+
+    let rangeStart: number;
+
+    if (num1 - rangeGap < 0) {
+        rangeStart = 0;
+    } else {
+        rangeStart = num1 - rangeGap;
+    }
+
+    const [numberLineRangeStart, setNumberLineRangeStart] =
+        useState(rangeStart);
+    const [numberLineRangeEnd, setNumberLineRangeEnd] = useState(
+        num1 + num2 + rangeGap,
+    );
     const [showExplanation, setShowExplanation] = useState(false);
     const [displayAnswerIncorrectMessage, setDisplayAnswerIncorrectMessage] =
         useState(false);
