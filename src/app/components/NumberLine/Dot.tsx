@@ -1,11 +1,10 @@
 "use client";
 import { useState, useEffect, useContext } from "react";
-import { ResetContext } from "app/contexts/resetContext";
+import ResetContext from "app/contexts/resetContext";
 
 type DotProps = {
     explanationMode: boolean;
     autoSelected: boolean;
-    resetState?: boolean;
 };
 
 export default function Dot({ explanationMode, autoSelected }: DotProps) {

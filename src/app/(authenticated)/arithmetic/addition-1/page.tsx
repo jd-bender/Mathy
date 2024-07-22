@@ -5,10 +5,14 @@ import { getRandomNumber } from "utilities";
 import { TextField, Button, Tooltip } from "@mui/material";
 import HelpIcon from "@mui/icons-material/Help";
 
-import { ResetContext } from "app/contexts/resetContext";
+import ResetContext from "app/contexts/resetContext";
 import NumberLine from "app/components/NumberLine/NumberLine";
 
 export default function Page() {
+    const minNumber = 0,
+        maxNumber = 9;
+    const rangeGap = 4;
+
     const [number1, setNumber1] = useState(null);
     const [number2, setNumber2] = useState(null);
     const [answer, setAnswer] = useState("");
@@ -26,9 +30,6 @@ export default function Page() {
     const [answerStatusMessage, setAnswerStatusMessage] = useState("Correct!");
     const [resetState, setResetState] = useState(false);
 
-    let minNumber = 0,
-        maxNumber = 9;
-
     const resetEquation = useCallback(() => {
         setAnswer("");
 
@@ -37,8 +38,6 @@ export default function Page() {
 
         setNumber1(num1);
         setNumber2(num2);
-
-        const rangeGap = 4;
 
         if (num1 - rangeGap < 0) {
             setNumberLineRangeStart(0);

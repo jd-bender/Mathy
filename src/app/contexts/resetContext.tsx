@@ -1,3 +1,5 @@
 import { createContext } from "react";
 
-export const ResetContext = createContext(false);
+const ResetContext = createContext(false);
+
+export default ResetContext;
