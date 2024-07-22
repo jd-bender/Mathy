@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { getRandomNumber } from "utilities";
 import { TextField, Button, Tooltip } from "@mui/material";
@@ -18,7 +18,7 @@ export default function Page() {
     const [number1, setNumber1] = useState(num1);
     const [number2, setNumber2] = useState(num2);
     const [answer, setAnswer] = useState("");
-    const [numbersSet, setNumbersSet] = useState(false);
+    const [numbersSet] = useState(true);
 
     let rangeStart: number;
 
@@ -36,15 +36,17 @@ export default function Page() {
     const [showExplanation, setShowExplanation] = useState(false);
     const [displayAnswerIncorrectMessage, setDisplayAnswerIncorrectMessage] =
         useState(false);
-    const [showSubmitButton, setShowSubmitButton] = useState(false);
-    const [answerInputDisabled, setAnswerInputDisabled] = useState(true);
+    const [showSubmitButton, setShowSubmitButton] = useState(true);
+    const [answerInputDisabled, setAnswerInputDisabled] = useState(false);
     const [correctAnswerStreak, setCorrectAnswerStreak] = useState(0);
     const [showAnswerStatusMessage, setShowAnswerStatusMessage] =
         useState(false);
     const [answerStatusMessage, setAnswerStatusMessage] = useState("Correct!");
     const [resetState, setResetState] = useState(false);
 
-    const resetEquation = useCallback(() => {
+    const responseTime = 1000;
+
+    const resetEquation = () => {
         setAnswer("");
 
         const num1 = getRandomNumber(minNumber, maxNumber);
@@ -69,12 +71,7 @@ export default function Page() {
         setTimeout(() => {
             setResetState(false);
         }, 1000);
-    }, [minNumber, maxNumber]);
-
-    useEffect(() => {
-        resetEquation();
-        setNumbersSet(true);
-    }, [resetEquation]);
+    };
 
     const submitAnswer = () => {
         let isCorrect = number1 + number2 === Number(answer);
@@ -90,22 +87,16 @@ export default function Page() {
         }
 
         setShowAnswerStatusMessage(true);
+
+        setShowSubmitButton(false);
+        setAnswerInputDisabled(true);
+
+        setTimeout(() => {
+            setShowAnswerStatusMessage(false);
+            resetEquation();
+            setShowSubmitButton(true);
+        }, responseTime);
     };
-
-    const responseTime = 1000;
-
-    useEffect(() => {
-        if (showAnswerStatusMessage) {
-            setShowSubmitButton(false);
-            setAnswerInputDisabled(true);
-
-            setTimeout(() => {
-                setShowAnswerStatusMessage(false);
-                resetEquation();
-                setShowSubmitButton(true);
-            }, responseTime);
-        }
-    }, [showAnswerStatusMessage, resetEquation]);
 
     useEffect(() => {
         if (displayAnswerIncorrectMessage) {
