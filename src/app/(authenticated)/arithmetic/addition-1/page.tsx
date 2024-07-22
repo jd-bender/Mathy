@@ -32,7 +32,7 @@ export default function Page() {
     const rangeGap = 4;
     const responseTime = 1000;
 
-    useEffect(() => {
+    const setNumbers = () => {
         const num1 = getRandomNumber(minNumber, maxNumber);
         const num2 = getRandomNumber(minNumber, maxNumber);
 
@@ -46,25 +46,16 @@ export default function Page() {
         }
 
         setNumberLineRangeEnd(num1 + num2 + rangeGap);
+    };
+
+    useEffect(() => {
+        setNumbers();
         setNumbersSet(true);
     }, []);
 
     const resetEquation = () => {
         setAnswer("");
-
-        const num1 = getRandomNumber(minNumber, maxNumber);
-        const num2 = getRandomNumber(minNumber, maxNumber);
-
-        setNumber1(num1);
-        setNumber2(num2);
-
-        if (num1 - rangeGap < 0) {
-            setNumberLineRangeStart(0);
-        } else {
-            setNumberLineRangeStart(num1 - rangeGap);
-        }
-
-        setNumberLineRangeEnd(num1 + num2 + rangeGap);
+        setNumbers();
 
         setShowSubmitButton(true);
         setAnswerInputDisabled(false);
