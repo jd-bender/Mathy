@@ -17,8 +17,6 @@ export default function Page() {
     const [numberLineRangeEnd, setNumberLineRangeEnd] = useState(null);
     const [numbersSet, setNumbersSet] = useState(false);
     const [showExplanation, setShowExplanation] = useState(false);
-    const [displayAnswerIncorrectMessage, setDisplayAnswerIncorrectMessage] =
-        useState(false);
     const [showSubmitButton, setShowSubmitButton] = useState(true);
     const [answerInputDisabled, setAnswerInputDisabled] = useState(false);
     const [correctAnswerStreak, setCorrectAnswerStreak] = useState(0);
@@ -68,7 +66,7 @@ export default function Page() {
     };
 
     const submitAnswer = () => {
-        let isCorrect = number1 + number2 === Number(answer);
+        const isCorrect = number1 + number2 === Number(answer);
 
         if (isCorrect) {
             setCorrectAnswerStreak(
@@ -91,14 +89,6 @@ export default function Page() {
             setShowSubmitButton(true);
         }, responseTime);
     };
-
-    useEffect(() => {
-        if (displayAnswerIncorrectMessage) {
-            setTimeout(() => {
-                setDisplayAnswerIncorrectMessage(false);
-            }, responseTime);
-        }
-    }, [displayAnswerIncorrectMessage]);
 
     return (
         <span className="relative block">
