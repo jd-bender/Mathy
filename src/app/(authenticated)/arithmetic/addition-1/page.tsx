@@ -17,7 +17,7 @@ export default function Page() {
     const [numberLineRangeEnd, setNumberLineRangeEnd] = useState(null);
     const [numbersSet, setNumbersSet] = useState(false);
     const [showExplanation, setShowExplanation] = useState(false);
-    const [showSubmitButton, setShowSubmitButton] = useState(true);
+    const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
     const [answerInputDisabled, setAnswerInputDisabled] = useState(false);
     const [correctAnswerStreak, setCorrectAnswerStreak] = useState(0);
     const [showAnswerStatusMessage, setShowAnswerStatusMessage] =
@@ -55,7 +55,7 @@ export default function Page() {
         setAnswer("");
         setNumbers();
 
-        setShowSubmitButton(true);
+        setSubmitButtonDisabled(false);
         setAnswerInputDisabled(false);
         setShowExplanation(false);
         setResetState(true);
@@ -67,26 +67,28 @@ export default function Page() {
 
     const submitAnswer = () => {
         const isCorrect = number1 + number2 === Number(answer);
+        const message = isCorrect ? "Correct!" : "Incorrect.";
+
+        setAnswerStatusMessage(message);
+        setShowAnswerStatusMessage(true);
+        setSubmitButtonDisabled(true);
 
         if (isCorrect) {
             setCorrectAnswerStreak(
                 (correctAnswerStreak) => correctAnswerStreak + 1,
             );
-            setAnswerStatusMessage("Correct!");
+            setAnswerInputDisabled(true);
         } else {
             setCorrectAnswerStreak(0);
-            setAnswerStatusMessage("Incorrect.");
         }
-
-        setShowAnswerStatusMessage(true);
-
-        setShowSubmitButton(false);
-        setAnswerInputDisabled(true);
 
         setTimeout(() => {
             setShowAnswerStatusMessage(false);
-            resetEquation();
-            setShowSubmitButton(true);
+            setSubmitButtonDisabled(false);
+
+            if (isCorrect) {
+                resetEquation();
+            }
         }, responseTime);
     };
 
@@ -139,15 +141,13 @@ export default function Page() {
                     className="mr-2"
                     autoComplete="off"
                 />
-                {showSubmitButton && (
-                    <Button
-                        onClick={submitAnswer}
-                        variant="contained"
-                        disabled={!answer}
-                    >
-                        Submit Answer
-                    </Button>
-                )}
+                <Button
+                    onClick={submitAnswer}
+                    variant="contained"
+                    disabled={submitButtonDisabled || !answer}
+                >
+                    Submit Answer
+                </Button>
             </div>
 
             <Link href="/" className="absolute bottom-0 right-0">
