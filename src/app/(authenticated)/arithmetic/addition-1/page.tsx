@@ -5,7 +5,7 @@ import { getRandomNumber } from "utilities";
 import { TextField, Button, Tooltip } from "@mui/material";
 import HelpIcon from "@mui/icons-material/Help";
 
-import NumberLineContext from "app/contexts/numberLineContext";
+import NumberLineContext from "app/components/NumberLine/numberLineContext";
 import NumberLine from "app/components/NumberLine/NumberLine";
 
 export default function Page() {
@@ -25,6 +25,8 @@ export default function Page() {
     const [answerStatusMessage, setAnswerStatusMessage] = useState("Correct!");
     const [resetSignal, setResetSignal] = useState(false);
     const [selectedDots, setSelectedDots] = useState(0);
+    const [startPosition, setStartPosition] = useState(null);
+    const [endPosition, setEndPosition] = useState(null);
 
     const minNumber = 0,
         maxNumber = 9;
@@ -124,10 +126,18 @@ export default function Page() {
                         {number1} + {number2} = ?
                     </div>
                     <NumberLineContext.Provider
-                        value={{ resetSignal, selectedDots, setSelectedDots }}
+                        value={{
+                            resetSignal,
+                            selectedDots,
+                            setSelectedDots,
+                            setStartPosition,
+                            setEndPosition,
+                        }}
                     >
                         <NumberLine
                             range={[numberLineRangeStart, numberLineRangeEnd]}
+                            startPosition={startPosition}
+                            endPosition={endPosition}
                             explanationMode={false}
                         />
                     </NumberLineContext.Provider>

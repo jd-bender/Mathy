@@ -1,15 +1,26 @@
 "use client";
 import { useState, useEffect, useContext } from "react";
-import NumberLineContext from "app/contexts/numberLineContext";
+import NumberLineContext from "app/components/NumberLine/numberLineContext";
 
 type DotProps = {
     explanationMode: boolean;
     autoSelected: boolean;
+    position: number;
 };
 
-export default function Dot({ explanationMode, autoSelected }: DotProps) {
+export default function Dot({
+    explanationMode,
+    autoSelected,
+    position,
+}: DotProps) {
     const context = useContext(NumberLineContext);
-    const { resetSignal, selectedDots, setSelectedDots } = context;
+    const {
+        resetSignal,
+        selectedDots,
+        setSelectedDots,
+        setStartPosition,
+        setEndPosition,
+    } = context;
 
     const [selected, setSelected] = useState(
         explanationMode ? autoSelected : false,
@@ -23,17 +34,26 @@ export default function Dot({ explanationMode, autoSelected }: DotProps) {
 
     useEffect(() => {
         if (selected) {
-            setSelectedDots((selectedDot) => selectedDot + 1);
+            setSelectedDots((selectedDot) => {
+                if (selectedDot + 1 === 1) {
+                    setStartPosition(position);
+                } else if (selectedDot + 1 === 2) {
+                    setEndPosition(position);
+                }
+                return selectedDot + 1;
+            });
         } else {
             setSelectedDots((selectedDot) => {
                 if (selectedDot > 0) {
+                    setEndPosition(null);
                     return selectedDot - 1;
                 } else {
+                    setStartPosition(null);
                     return 0;
                 }
             });
         }
-    }, [selected, setSelectedDots]);
+    }, [selected, setSelectedDots, position, setStartPosition, setEndPosition]);
 
     const handleClick = () => {
         if (selectedDots < 2) {
@@ -57,6 +77,8 @@ export default function Dot({ explanationMode, autoSelected }: DotProps) {
     return (
         <span
             onClick={() => !explanationMode && handleClick()}
+            onMouseEnter={() => {}}
+            onMouseLeave={() => {}}
             className={`h-3 w-3 ${color} rounded-full absolute top-0.5 ${visible}`}
         ></span>
     );

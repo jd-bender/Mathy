@@ -25,18 +25,15 @@ export default function Notch({
             <Dot
                 explanationMode={explanationMode}
                 autoSelected={isStartPosition || isEndPosition}
+                position={position}
             />
 
-            {explanationMode && (
-                <>
-                    {inRange && (
-                        <span className="bg-green-500 h-1 absolute top-1.5 left-3 w-7 z-40"></span>
-                    )}
+            {inRange && (
+                <span className="bg-green-500 h-1 absolute top-1.5 left-3 w-7 z-40"></span>
+            )}
 
-                    {lastInRange && modifier !== 0 && (
-                        <Arrow direction="right" isRangeEnder={true} />
-                    )}
-                </>
+            {lastInRange && modifier !== 0 && (
+                <Arrow direction="right" isRangeEnder={true} />
             )}
 
             <span className="flex flex-col items-center w-[1.75rem]">
