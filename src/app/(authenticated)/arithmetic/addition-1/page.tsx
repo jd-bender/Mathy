@@ -5,7 +5,7 @@ import { getRandomNumber } from "utilities";
 import { TextField, Button, Tooltip } from "@mui/material";
 import HelpIcon from "@mui/icons-material/Help";
 
-import ResetContext from "app/contexts/resetContext";
+import NumberLineContext from "app/contexts/numberLineContext";
 import NumberLine from "app/components/NumberLine/NumberLine";
 
 export default function Page() {
@@ -24,6 +24,7 @@ export default function Page() {
         useState(false);
     const [answerStatusMessage, setAnswerStatusMessage] = useState("Correct!");
     const [resetState, setResetState] = useState(false);
+    const [selectedDots, setSelectedDots] = useState(0);
 
     const minNumber = 0,
         maxNumber = 9;
@@ -51,6 +52,10 @@ export default function Page() {
         setNumbersSet(true);
     }, []);
 
+    useEffect(() => {
+        console.log("detected change in selectedDots: " + selectedDots);
+    }, [selectedDots]);
+
     const resetEquation = () => {
         setAnswer("");
         setNumbers();
@@ -59,6 +64,7 @@ export default function Page() {
         setAnswerInputDisabled(false);
         setShowExplanation(false);
         setResetState(true);
+        setSelectedDots(0);
 
         setTimeout(() => {
             setResetState(false);
@@ -121,12 +127,14 @@ export default function Page() {
                     <div className="mb-2">
                         {number1} + {number2} = ?
                     </div>
-                    <ResetContext.Provider value={resetState}>
+                    <NumberLineContext.Provider
+                        value={{ resetState, selectedDots, setSelectedDots }}
+                    >
                         <NumberLine
                             range={[numberLineRangeStart, numberLineRangeEnd]}
                             explanationMode={false}
                         />
-                    </ResetContext.Provider>
+                    </NumberLineContext.Provider>
                 </>
             )}
 

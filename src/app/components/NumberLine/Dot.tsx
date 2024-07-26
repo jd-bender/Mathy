@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useContext } from "react";
-import ResetContext from "app/contexts/resetContext";
+import NumberLineContext from "app/contexts/numberLineContext";
 
 type DotProps = {
     explanationMode: boolean;
@@ -8,7 +8,9 @@ type DotProps = {
 };
 
 export default function Dot({ explanationMode, autoSelected }: DotProps) {
-    const resetSignal = useContext(ResetContext);
+    const resetSignal = useContext(NumberLineContext).resetState;
+    const selectedDots = useContext(NumberLineContext).selectedDots;
+    const setSelectedDots = useContext(NumberLineContext).setSelectedDots;
 
     const [selected, setSelected] = useState(
         explanationMode ? autoSelected : false,
@@ -20,8 +22,33 @@ export default function Dot({ explanationMode, autoSelected }: DotProps) {
         }
     }, [resetSignal]);
 
+    useEffect(() => {
+        if (selected) {
+            setSelectedDots((selectedDot) => selectedDot + 1);
+        } else {
+            setSelectedDots((selectedDot) => {
+                if (selectedDot > 0) {
+                    return selectedDot - 1;
+                } else {
+                    return 0;
+                }
+            });
+        }
+    }, [selected, setSelectedDots]);
+
+    const handleClick = () => {
+        if (selectedDots < 2) {
+            setSelected(!selected);
+        } else {
+            setSelected(false);
+        }
+    };
+
     const color = selected ? "bg-green-500" : "bg-green-400";
-    const showOnHover = "opacity-0 hover:opacity-100";
+    const showOnHover =
+        selectedDots < 2
+            ? "opacity-0 hover:opacity-100 cursor-pointer"
+            : "opacity-0";
     const visible = selected
         ? "opacity-100"
         : explanationMode
@@ -30,7 +57,7 @@ export default function Dot({ explanationMode, autoSelected }: DotProps) {
 
     return (
         <span
-            onClick={() => !explanationMode && setSelected(!selected)}
+            onClick={() => !explanationMode && handleClick()}
             className={`h-3 w-3 ${color} rounded-full absolute top-0.5 ${visible}`}
         ></span>
     );
