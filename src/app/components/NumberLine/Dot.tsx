@@ -8,9 +8,10 @@ type DotProps = {
 };
 
 export default function Dot({ explanationMode, autoSelected }: DotProps) {
-    const resetSignal = useContext(NumberLineContext).resetState;
-    const selectedDots = useContext(NumberLineContext).selectedDots;
-    const setSelectedDots = useContext(NumberLineContext).setSelectedDots;
+    const context = useContext(NumberLineContext);
+    const resetSignal = context.resetState;
+    const selectedDots = context.selectedDots;
+    const setSelectedDots = context.setSelectedDots;
 
     const [selected, setSelected] = useState(
         explanationMode ? autoSelected : false,
@@ -50,7 +51,7 @@ export default function Dot({ explanationMode, autoSelected }: DotProps) {
             ? "opacity-0 hover:opacity-100 cursor-pointer"
             : "opacity-0";
     const visible = selected
-        ? "opacity-100"
+        ? "opacity-100 cursor-pointer"
         : explanationMode
           ? "opacity-0"
           : showOnHover;

@@ -52,10 +52,6 @@ export default function Page() {
         setNumbersSet(true);
     }, []);
 
-    useEffect(() => {
-        console.log("detected change in selectedDots: " + selectedDots);
-    }, [selectedDots]);
-
     const resetEquation = () => {
         setAnswer("");
         setNumbers();
