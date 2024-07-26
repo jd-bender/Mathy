@@ -9,9 +9,7 @@ type DotProps = {
 
 export default function Dot({ explanationMode, autoSelected }: DotProps) {
     const context = useContext(NumberLineContext);
-    const resetSignal = context.resetState;
-    const selectedDots = context.selectedDots;
-    const setSelectedDots = context.setSelectedDots;
+    const { resetSignal, selectedDots, setSelectedDots } = context;
 
     const [selected, setSelected] = useState(
         explanationMode ? autoSelected : false,

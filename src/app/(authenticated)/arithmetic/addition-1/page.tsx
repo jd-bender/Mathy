@@ -23,7 +23,7 @@ export default function Page() {
     const [showAnswerStatusMessage, setShowAnswerStatusMessage] =
         useState(false);
     const [answerStatusMessage, setAnswerStatusMessage] = useState("Correct!");
-    const [resetState, setResetState] = useState(false);
+    const [resetSignal, setResetSignal] = useState(false);
     const [selectedDots, setSelectedDots] = useState(0);
 
     const minNumber = 0,
@@ -59,11 +59,11 @@ export default function Page() {
         setSubmitButtonDisabled(false);
         setAnswerInputDisabled(false);
         setShowExplanation(false);
-        setResetState(true);
+        setResetSignal(true);
         setSelectedDots(0);
 
         setTimeout(() => {
-            setResetState(false);
+            setResetSignal(false);
         }, responseTime);
     };
 
@@ -124,7 +124,7 @@ export default function Page() {
                         {number1} + {number2} = ?
                     </div>
                     <NumberLineContext.Provider
-                        value={{ resetState, selectedDots, setSelectedDots }}
+                        value={{ resetSignal, selectedDots, setSelectedDots }}
                     >
                         <NumberLine
                             range={[numberLineRangeStart, numberLineRangeEnd]}
