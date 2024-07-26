@@ -25,6 +25,7 @@ export default function Notch({
             <Dot
                 explanationMode={explanationMode}
                 autoSelected={isStartPosition || isEndPosition}
+                key={position}
             />
 
             {explanationMode && (

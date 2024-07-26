@@ -8,10 +8,11 @@ type DotProps = {
 };
 
 export default function Dot({ explanationMode, autoSelected }: DotProps) {
+    const resetSignal = useContext(ResetContext);
+
     const [selected, setSelected] = useState(
         explanationMode ? autoSelected : false,
     );
-    const resetSignal = useContext(ResetContext);
 
     useEffect(() => {
         if (resetSignal) {
