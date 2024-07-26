@@ -49,7 +49,7 @@ export default function Dot({ explanationMode, autoSelected }: DotProps) {
             ? "opacity-0 hover:opacity-100 cursor-pointer"
             : "opacity-0";
     const visible = selected
-        ? "opacity-100 cursor-pointer"
+        ? `opacity-100 ${!explanationMode ? "cursor-pointer" : ""}`
         : explanationMode
           ? "opacity-0"
           : showOnHover;
