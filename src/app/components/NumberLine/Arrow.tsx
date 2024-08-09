@@ -6,7 +6,7 @@ type ArrowProps = {
 export default function Arrow({ direction, isRangeEnder }: ArrowProps) {
     const rotation = direction === "left" ? "rotate-[135deg]" : "-rotate-45";
     const position = isRangeEnder
-        ? "border-green-500 absolute left-6"
+        ? `border-green-500 absolute ${direction === "left" ? "left-12" : "left-6"}`
         : "border-black relative";
     return (
         <span

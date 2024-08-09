@@ -4,22 +4,43 @@ import Arrow from "./Arrow";
 type NotchProps = {
     position: number;
     explanationMode: boolean;
-    isStartPosition: boolean;
-    isEndPosition: boolean;
-    inRange: boolean;
-    lastInRange: boolean;
+    startPosition: number;
+    endPosition: number;
     modifier: number;
 };
 
 export default function Notch({
     position,
     explanationMode,
-    isStartPosition,
-    isEndPosition,
-    inRange,
-    lastInRange,
+    startPosition,
+    endPosition,
     modifier,
 }: NotchProps) {
+    const isStartPosition = position === startPosition;
+    const isEndPosition = position === endPosition;
+
+    const lineDirection = position >= startPosition ? "right" : "left";
+
+    const startAndEndSelected =
+        typeof startPosition === "number" && typeof endPosition === "number";
+
+    const inRange =
+        lineDirection === "right"
+            ? position >= startPosition && position < endPosition
+            : position < startPosition && position >= endPosition;
+    const greenHorizontalLineActive = startAndEndSelected ? inRange : false;
+
+    const lastNotchInRange = position === endPosition - 1;
+
+    const GreenHorizontalLine = () => (
+        <span
+            className={`bg-green-500 h-1 absolute top-1.5 w-7 z-40 ${lineDirection === "right" ? "left-3" : "left-5"}`}
+        ></span>
+    );
+    const BlackVerticalLine = () => (
+        <span className="bg-black w-1 h-4 block"></span>
+    );
+
     return (
         <span className="flex flex-col items-center relative">
             <Dot
@@ -28,16 +49,14 @@ export default function Notch({
                 position={position}
             />
 
-            {inRange && (
-                <span className="bg-green-500 h-1 absolute top-1.5 left-3 w-7 z-40"></span>
-            )}
+            {greenHorizontalLineActive && <GreenHorizontalLine />}
 
-            {lastInRange && modifier !== 0 && (
-                <Arrow direction="right" isRangeEnder={true} />
+            {lastNotchInRange && modifier !== 0 && (
+                <Arrow direction={lineDirection} isRangeEnder={true} />
             )}
 
             <span className="flex flex-col items-center w-[1.75rem]">
-                <span className="bg-black w-1 h-4 block"></span>
+                <BlackVerticalLine />
                 <span>{position}</span>
             </span>
         </span>

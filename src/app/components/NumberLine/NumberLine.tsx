@@ -27,10 +27,8 @@ export default function NumberLine({
             <Notch
                 position={i}
                 explanationMode={explanationMode}
-                isStartPosition={i === startPosition}
-                isEndPosition={i === endPosition}
-                inRange={i >= startPosition && i < endPosition}
-                lastInRange={i === endPosition - 1}
+                startPosition={startPosition}
+                endPosition={endPosition}
                 modifier={modifier}
                 key={i}
             />,

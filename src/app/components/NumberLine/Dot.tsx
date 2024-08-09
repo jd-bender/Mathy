@@ -27,26 +27,26 @@ export default function Dot({
     );
 
     useEffect(() => {
-        if (resetSignal) {
+        if (resetSignal && selected) {
             setSelected(false);
         }
-    }, [resetSignal]);
+    }, [resetSignal, selected]);
 
     useEffect(() => {
         if (selected) {
-            setSelectedDots((selectedDot) => {
-                if (selectedDot + 1 === 1) {
+            setSelectedDots((selectedDotCount) => {
+                if (selectedDotCount + 1 === 1) {
                     setStartPosition(position);
-                } else if (selectedDot + 1 === 2) {
+                } else if (selectedDotCount + 1 === 2) {
                     setEndPosition(position);
                 }
-                return selectedDot + 1;
+                return selectedDotCount + 1;
             });
         } else {
-            setSelectedDots((selectedDot) => {
-                if (selectedDot > 0) {
+            setSelectedDots((selectedDotCount) => {
+                if (selectedDotCount > 0) {
                     setEndPosition(null);
-                    return selectedDot - 1;
+                    return selectedDotCount - 1;
                 } else {
                     setStartPosition(null);
                     return 0;
