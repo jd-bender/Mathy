@@ -54,7 +54,7 @@ export default function Page() {
         setNumbersSet(true);
     }, []);
 
-    const resetEquation = () => {
+    const resetState = () => {
         setAnswer("");
         setNumbers();
 
@@ -93,7 +93,7 @@ export default function Page() {
             setSubmitButtonDisabled(false);
 
             if (isCorrect) {
-                resetEquation();
+                resetState();
             }
         }, responseTime);
     };
