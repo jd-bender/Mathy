@@ -62,6 +62,8 @@ export default function Page() {
         setAnswerInputDisabled(false);
         setShowExplanation(false);
         setResetSignal(true);
+        setStartPosition(null);
+        setEndPosition(null);
         setSelectedDots(0);
 
         setTimeout(() => {
