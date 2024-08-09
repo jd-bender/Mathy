@@ -37,11 +37,11 @@ export default function Notch({
 
     const GreenHorizontalLine = () => (
         <span
-            className={`bg-green-500 h-1 absolute top-1.5 w-7 z-40 ${lineDirection === "right" ? "left-3" : "left-5"}`}
+            className={`bg-green-500 h-1 absolute top-1.5 w-7 z-10 ${lineDirection === "right" ? "left-3" : "left-5"}`}
         ></span>
     );
     const BlackVerticalLine = () => (
-        <span className="bg-black w-1 h-4 block"></span>
+        <span className="bg-black w-1 h-4 block z-0"></span>
     );
 
     return (

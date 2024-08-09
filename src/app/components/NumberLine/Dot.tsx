@@ -77,6 +77,18 @@ export default function Dot({
         setSelected(isSelected);
     };
 
+    const handleMouseEnter = () => {
+        if (selectedDots === 1 && position !== startPosition) {
+            setEndPosition(position);
+        }
+    };
+
+    const handleMouseLeave = () => {
+        if (selectedDots === 1) {
+            setEndPosition(null);
+        }
+    };
+
     const color = selected ? "bg-green-500" : "bg-green-400";
     const showOnHover =
         selectedDots < 2
@@ -91,9 +103,9 @@ export default function Dot({
     return (
         <span
             onClick={() => !explanationMode && handleClick()}
-            onMouseEnter={() => {}}
-            onMouseLeave={() => {}}
-            className={`h-3 w-3 ${color} rounded-full absolute top-0.5 ${visible}`}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            className={`h-3 w-3 ${color} rounded-full absolute top-0.5 ${visible} z-20`}
         ></span>
     );
 }
