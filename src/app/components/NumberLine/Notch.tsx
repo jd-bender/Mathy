@@ -30,7 +30,10 @@ export default function Notch({
             : position < startPosition && position >= endPosition;
     const greenHorizontalLineActive = startAndEndSelected ? inRange : false;
 
-    const lastNotchInRange = position === endPosition - 1;
+    const lastNotchInRange =
+        lineDirection === "right"
+            ? position === endPosition - 1
+            : position === endPosition;
 
     const GreenHorizontalLine = () => (
         <span
@@ -47,6 +50,8 @@ export default function Notch({
                 explanationMode={explanationMode}
                 autoSelected={isStartPosition || isEndPosition}
                 position={position}
+                startPosition={startPosition}
+                endPosition={endPosition}
             />
 
             {greenHorizontalLineActive && <GreenHorizontalLine />}

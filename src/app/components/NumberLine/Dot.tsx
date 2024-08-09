@@ -6,12 +6,16 @@ type DotProps = {
     explanationMode: boolean;
     autoSelected: boolean;
     position: number;
+    startPosition: number;
+    endPosition: number;
 };
 
 export default function Dot({
     explanationMode,
     autoSelected,
     position,
+    startPosition,
+    endPosition,
 }: DotProps) {
     const context = useContext(NumberLineContext);
     const {
@@ -32,35 +36,45 @@ export default function Dot({
         }
     }, [resetSignal, selected]);
 
-    useEffect(() => {
-        if (selected) {
+    const handleClick = () => {
+        let isSelected = false;
+
+        if (selectedDots < 2) {
+            isSelected = !selected;
+        }
+
+        if (isSelected) {
+            if (selectedDots + 1 === 1) {
+                setStartPosition(position);
+            } else if (selectedDots + 1 === 2) {
+                setEndPosition(position);
+            }
+
             setSelectedDots((selectedDotCount) => {
-                if (selectedDotCount + 1 === 1) {
-                    setStartPosition(position);
-                } else if (selectedDotCount + 1 === 2) {
-                    setEndPosition(position);
-                }
                 return selectedDotCount + 1;
             });
         } else {
-            setSelectedDots((selectedDotCount) => {
-                if (selectedDotCount > 0) {
-                    setEndPosition(null);
-                    return selectedDotCount - 1;
-                } else {
+            if (position === startPosition || position === endPosition) {
+                if (selectedDots === 1) {
                     setStartPosition(null);
-                    return 0;
+                } else if (selectedDots === 2 && position === startPosition) {
+                    setStartPosition(endPosition);
+                    setEndPosition(null);
+                } else {
+                    setEndPosition(null);
                 }
-            });
-        }
-    }, [selected, setSelectedDots, position, setStartPosition, setEndPosition]);
 
-    const handleClick = () => {
-        if (selectedDots < 2) {
-            setSelected(!selected);
-        } else {
-            setSelected(false);
+                setSelectedDots((selectedDotCount) => {
+                    if (selectedDotCount > 0) {
+                        return selectedDotCount - 1;
+                    } else {
+                        return 0;
+                    }
+                });
+            }
         }
+
+        setSelected(isSelected);
     };
 
     const color = selected ? "bg-green-500" : "bg-green-400";
