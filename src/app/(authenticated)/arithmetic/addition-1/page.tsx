@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect, SyntheticEvent } from "react";
-import Link from "next/link";
 import { getRandomNumber } from "utilities";
 import { Tabs, Tab, TextField, Button, Box } from "@mui/material";
 
@@ -197,10 +196,6 @@ export default function Page() {
                             Submit Answer
                         </Button>
                     </div>
-
-                    <Link href="/" className="absolute bottom-0 right-0">
-                        Return
-                    </Link>
                 </div>
             </TabPanel>
         </Box>
