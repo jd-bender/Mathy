@@ -5,5 +5,5 @@ export default function ArithmeticLayout({
 }: {
     children: ReactNode;
 }) {
-    return <div className="m-8 p-4 rounded-lg bg-palette-3">{children}</div>;
+    return <div>{children}</div>;
 }

@@ -1,14 +1,16 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, SyntheticEvent } from "react";
 import Link from "next/link";
 import { getRandomNumber } from "utilities";
-import { TextField, Button, Tooltip } from "@mui/material";
-import HelpIcon from "@mui/icons-material/Help";
+import { Tabs, Tab, TextField, Button, Box } from "@mui/material";
 
+import TabPanel from "app/components/TabPanel";
 import NumberLineContext from "app/components/NumberLine/numberLineContext";
 import NumberLine from "app/components/NumberLine/NumberLine";
 
 export default function Page() {
+    const [selectedTab, setSelectedTab] = useState(0);
+
     const [number1, setNumber1] = useState(null);
     const [number2, setNumber2] = useState(null);
     const [answer, setAnswer] = useState("");
@@ -27,6 +29,13 @@ export default function Page() {
     const [selectedDots, setSelectedDots] = useState(0);
     const [startPosition, setStartPosition] = useState(null);
     const [endPosition, setEndPosition] = useState(null);
+
+    const handleSelectedTabChange = (
+        _event: SyntheticEvent,
+        newTab: number,
+    ) => {
+        setSelectedTab(newTab);
+    };
 
     const minNumber = 0,
         maxNumber = 9;
@@ -99,76 +108,101 @@ export default function Page() {
     };
 
     return (
-        <span className="relative block">
-            <div>
-                Addition 1
-                <Tooltip title="Explanation">
-                    <HelpIcon
-                        className="cursor-pointer"
-                        onClick={() => setShowExplanation(!showExplanation)}
-                    />
-                </Tooltip>
-            </div>
-            {showExplanation && (
-                <NumberLine
-                    range={[numberLineRangeStart, numberLineRangeEnd]}
-                    explanationMode={true}
-                    startPosition={number1}
-                    endPosition={number1 + number2}
-                    modifier={number2}
-                />
-            )}
+        <Box sx={{ width: "100%" }}>
+            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+                <Tabs
+                    value={selectedTab}
+                    onChange={handleSelectedTabChange}
+                    centered
+                >
+                    <Tab label="Lesson" />
+                    <Tab label="Practice" />
+                </Tabs>
+            </Box>
 
-            <div className="my-2">
-                Correct answer streak: {correctAnswerStreak}
-            </div>
-            {numbersSet && (
-                <>
-                    <div className="mb-2">
-                        {number1} + {number2} = ?
+            <TabPanel value={selectedTab} index={0}>
+                <div>Lesson will be here</div>
+            </TabPanel>
+            <TabPanel value={selectedTab} index={1}>
+                <div className="relative block">
+                    <div className="mb-3">
+                        <Button
+                            variant="contained"
+                            onClick={() => setShowExplanation(!showExplanation)}
+                        >
+                            {showExplanation ? "Hide" : "Show"} Explanation
+                        </Button>
                     </div>
-                    <NumberLineContext.Provider
-                        value={{
-                            resetSignal,
-                            selectedDots,
-                            setSelectedDots,
-                            setStartPosition,
-                            setEndPosition,
-                        }}
-                    >
+
+                    {showExplanation && (
                         <NumberLine
                             range={[numberLineRangeStart, numberLineRangeEnd]}
-                            startPosition={startPosition}
-                            endPosition={endPosition}
-                            explanationMode={false}
+                            explanationMode={true}
+                            startPosition={number1}
+                            endPosition={number1 + number2}
+                            modifier={number2}
                         />
-                    </NumberLineContext.Provider>
-                </>
-            )}
+                    )}
 
-            <h1 className={showAnswerStatusMessage ? "visible" : "invisible"}>
-                {answerStatusMessage}
-            </h1>
-            <div className="flex justify-start gap-4">
-                <TextField
-                    value={answer}
-                    onChange={(e) => setAnswer(e.target.value)}
-                    disabled={answerInputDisabled}
-                    className="mr-2"
-                    autoComplete="off"
-                />
-                <Button
-                    onClick={submitAnswer}
-                    variant="contained"
-                    disabled={submitButtonDisabled || !answer}
-                >
-                    Submit Answer
-                </Button>
-            </div>
+                    <div className="my-2">
+                        Correct answer streak: {correctAnswerStreak}
+                    </div>
+                    {numbersSet && (
+                        <>
+                            <div className="mb-2">
+                                {number1} + {number2} = ?
+                            </div>
+                            <NumberLineContext.Provider
+                                value={{
+                                    resetSignal,
+                                    selectedDots,
+                                    setSelectedDots,
+                                    setStartPosition,
+                                    setEndPosition,
+                                }}
+                            >
+                                <NumberLine
+                                    range={[
+                                        numberLineRangeStart,
+                                        numberLineRangeEnd,
+                                    ]}
+                                    startPosition={startPosition}
+                                    endPosition={endPosition}
+                                    explanationMode={false}
+                                />
+                            </NumberLineContext.Provider>
+                        </>
+                    )}
 
-            <Link href="/" className="absolute bottom-0 right-0">
-                Return
-            </Link>
-        </span>
+                    <h1
+                        className={
+                            showAnswerStatusMessage ? "visible" : "invisible"
+                        }
+                    >
+                        {answerStatusMessage}
+                    </h1>
+                    <div className="flex justify-start gap-4">
+                        <TextField
+                            value={answer}
+                            onChange={(e) => setAnswer(e.target.value)}
+                            disabled={answerInputDisabled}
+                            className="mr-2"
+                            autoComplete="off"
+                        />
+                        <Button
+                            onClick={submitAnswer}
+                            variant="contained"
+                            disabled={submitButtonDisabled || !answer}
+                        >
+                            Submit Answer
+                        </Button>
+                    </div>
+
+                    <Link href="/" className="absolute bottom-0 right-0">
+                        Return
+                    </Link>
+                </div>
+            </TabPanel>
+        </Box>
     );
 }
