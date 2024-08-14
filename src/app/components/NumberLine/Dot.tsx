@@ -27,7 +27,9 @@ export default function Dot({
     } = context;
 
     const [selected, setSelected] = useState(
-        explanationMode ? autoSelected : false,
+        explanationMode
+            ? autoSelected
+            : position === startPosition || position === endPosition,
     );
 
     useEffect(() => {
