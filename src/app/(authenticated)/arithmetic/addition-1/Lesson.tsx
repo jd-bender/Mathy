@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Box, Button, Typography } from "@mui/material";
-import { page1Content, page2Content } from "./LessonContent";
+import { pages } from "./LessonContent";
 import NumberLine from "app/components/NumberLine/NumberLine";
 
 export default function Lesson() {
@@ -21,7 +21,7 @@ export default function Lesson() {
     };
 
     const populatePage1Content = () => {
-        let currentPageContent = page1Content.map((content, index) => (
+        let currentPageContent = pages[0].map((content, index) => (
             <Typography mb={2} key={index + 1}>
                 {content}
             </Typography>
@@ -31,7 +31,7 @@ export default function Lesson() {
             <Button
                 onClick={advanceToNextLessonPage}
                 variant="contained"
-                key={page1Content.length + 1}
+                key={pages[0].length + 1}
             >
                 Next
             </Button>,
@@ -42,7 +42,7 @@ export default function Lesson() {
     };
 
     const populatePage2Content = () => {
-        let currentPageContent = page2Content.map((content, index) => {
+        let currentPageContent = pages[1].map((content, index) => {
             switch (index) {
                 case 1:
                     return (
@@ -98,15 +98,15 @@ export default function Lesson() {
     };
 
     return (
-        <Box className="relative">
+        <Box sx={{ position: "relative", marginX: "10%", minWidth: "768px" }}>
             <span
-                className={`${hideActivePageContent ? "opacity-0" : "opacity-100"} transition-opacity ease-in-out duration-${pageTransitionTime}`}
+                className={`${hideActivePageContent ? "opacity-0" : "opacity-100"} transition-opacity ease-in-out duration-1000`}
             >
                 {activePageContent}
             </span>
 
             <Button
-                className={`${lessonStarted ? "opacity-0" : "opacity-100 absolute top-0 z-10"} transition-opacity ease-in-out duration-${pageTransitionTime}`}
+                className={`${lessonStarted ? "opacity-0" : "opacity-100 absolute top-0 z-10"} transition-opacity ease-in-out duration-1000`}
                 onClick={startLesson}
                 variant="contained"
                 disabled={startButtonDisabled}
