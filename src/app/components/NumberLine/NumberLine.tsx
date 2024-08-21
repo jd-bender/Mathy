@@ -7,6 +7,7 @@ type NumberLineProps = {
     startPosition?: number;
     endPosition?: number;
     modifier?: number;
+    className?: string;
 };
 
 export default function NumberLine({
@@ -15,6 +16,7 @@ export default function NumberLine({
     startPosition,
     endPosition,
     modifier,
+    className,
 }: NumberLineProps) {
     const segments = [];
 
@@ -40,7 +42,7 @@ export default function NumberLine({
     );
 
     return (
-        <span className="inline-block">
+        <span className={`inline-block ${className}`}>
             <span className="bg-black h-1 block relative top-2.5"></span>
             <span className="flex">{segments}</span>
         </span>
