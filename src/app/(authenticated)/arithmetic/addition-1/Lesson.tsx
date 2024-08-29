@@ -98,21 +98,21 @@ export default function Lesson() {
     };
 
     return (
-        <Box sx={{ position: "relative", marginX: "10%", minWidth: "768px" }}>
-            <span
-                className={`${hideActivePageContent ? "opacity-0" : "opacity-100"} transition-opacity ease-in-out duration-1000`}
-            >
-                {activePageContent}
-            </span>
-
+        <Box sx={{ position: "relative", marginX: "20%", minWidth: "768px" }}>
             <Button
-                className={`${lessonStarted ? "opacity-0" : "opacity-100 absolute top-0 z-10"} transition-opacity ease-in-out duration-1000`}
+                className={`${lessonStarted ? "opacity-0" : "opacity-100 z-10"} transition-opacity ease-in-out duration-1000`}
                 onClick={startLesson}
                 variant="contained"
                 disabled={startButtonDisabled}
             >
                 Start Lesson
             </Button>
+
+            <span
+                className={`${hideActivePageContent ? "opacity-0" : "opacity-100"} transition-opacity ease-in-out duration-1000 absolute top-0 left-0`}
+            >
+                {activePageContent}
+            </span>
         </Box>
     );
 }
