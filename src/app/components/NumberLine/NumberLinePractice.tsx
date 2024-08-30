@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { getRandomNumber } from "utilities";
 import { TextField, Button } from "@mui/material";
 
@@ -32,7 +32,7 @@ export default function NumberLinePractice({ mode }: { mode: string }) {
     const rangeGap = 4;
     const responseTime = 1000;
 
-    const generateExerciseValues = () => {
+    const generateExerciseValues = useCallback(() => {
         let num1 = getRandomNumber(minNumber, maxNumber);
         let num2 = getRandomNumber(minNumber, maxNumber);
 
@@ -70,12 +70,12 @@ export default function NumberLinePractice({ mode }: { mode: string }) {
 
                 break;
         }
-    };
+    }, [mode]);
 
     useEffect(() => {
         generateExerciseValues();
         setNumbersSet(true);
-    }, []);
+    }, [generateExerciseValues]);
 
     const resetState = () => {
         setAnswer("");
