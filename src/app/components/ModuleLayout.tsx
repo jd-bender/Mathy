@@ -2,6 +2,7 @@
 import { useState, SyntheticEvent, ReactNode } from "react";
 import { Tab, Box } from "@mui/material";
 import { TabPanel, TabList, TabContext } from "@mui/lab";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 
 export default function ModuleLayout({
     Lesson,
@@ -10,12 +11,36 @@ export default function ModuleLayout({
     Lesson: ReactNode;
     Practice: ReactNode;
 }) {
-    const [selectedTab, setSelectedTab] = useState("0");
+    const router = useRouter();
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+    const params = new URLSearchParams(searchParams);
+
+    const setParam = (name: string, value: string) => {
+        params.set(name, value);
+        router.push(pathname + "?" + params.toString());
+    };
+
+    let activeTab = "0";
+
+    if (params.get("tab")) {
+        switch (params.get("tab")) {
+            case "lesson":
+                activeTab = "0";
+                break;
+            case "practice":
+                activeTab = "1";
+                break;
+        }
+    }
+
+    const [selectedTab, setSelectedTab] = useState(activeTab);
 
     const handleSelectedTabChange = (
         _event: SyntheticEvent,
         newTab: string,
     ) => {
+        setParam("tab", newTab === "0" ? "lesson" : "practice");
         setSelectedTab(newTab);
     };
 
