@@ -5,11 +5,15 @@ import NumberLine from "app/components/NumberLine/NumberLine";
 
 export default function Lesson({ activePageIndex, setActivePageIndex }) {
     const goToLastPage = () => {
-        setActivePageIndex((oldActivePageIndex) => oldActivePageIndex - 1);
+        setActivePageIndex(
+            (oldActivePageIndex: number) => oldActivePageIndex - 1,
+        );
     };
 
     const goToNextPage = () => {
-        setActivePageIndex((oldActivePageIndex) => oldActivePageIndex + 1);
+        setActivePageIndex(
+            (oldActivePageIndex: number) => oldActivePageIndex + 1,
+        );
     };
 
     const PlainTextMapping = (content: string, index: number) => (

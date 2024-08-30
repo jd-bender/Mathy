@@ -8,7 +8,11 @@ import Practice from "./Practice";
 
 export default function Page() {
     const [selectedTab, setSelectedTab] = useState(0);
+
     const [activeLessonPage, setActiveLessonPage] = useState(0);
+
+    const [correctAnswerStreak, setCorrectAnswerStreak] = useState(0);
+    const [showExplanation, setShowExplanation] = useState(false);
 
     const handleSelectedTabChange = (
         _event: SyntheticEvent,
@@ -41,7 +45,12 @@ export default function Page() {
                     />
                 </TabPanel>
                 <TabPanel value={selectedTab} index={1}>
-                    <Practice />
+                    <Practice
+                        correctAnswerStreak={correctAnswerStreak}
+                        setCorrectAnswerStreak={setCorrectAnswerStreak}
+                        showExplanation={showExplanation}
+                        setShowExplanation={setShowExplanation}
+                    />
                 </TabPanel>
             </Box>
         </Box>
