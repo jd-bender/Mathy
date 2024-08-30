@@ -25,15 +25,6 @@ export default function LessonLayout({ pages }) {
                     {page}
                 </TabPanel>
             ))}
-            {/* <TabPanel value={activePageIndex} index={0}>
-                {Page1}
-            </TabPanel>
-            <TabPanel value={activePageIndex} index={1}>
-                {Page2}
-            </TabPanel>
-            <TabPanel value={activePageIndex} index={2}>
-                {Page3}
-            </TabPanel> */}
 
             <Box className="flex justify-between">
                 <Button
