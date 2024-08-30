@@ -1,5 +1,12 @@
 "use client";
-import { useState, SyntheticEvent, ReactNode } from "react";
+import {
+    useState,
+    useMemo,
+    useCallback,
+    useEffect,
+    SyntheticEvent,
+    ReactNode,
+} from "react";
 import { Tab, Box } from "@mui/material";
 import { TabPanel, TabList, TabContext } from "@mui/lab";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
@@ -14,12 +21,18 @@ export default function ModuleLayout({
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
-    const params = new URLSearchParams(searchParams);
+    const params = useMemo(
+        () => new URLSearchParams(searchParams),
+        [searchParams],
+    );
 
-    const setParam = (name: string, value: string) => {
-        params.set(name, value);
-        router.push(pathname + "?" + params.toString());
-    };
+    const setParam = useCallback(
+        (name: string, value: string) => {
+            params.set(name, value);
+            router.push(pathname + "?" + params.toString());
+        },
+        [params, pathname, router],
+    );
 
     let activeTab = "0";
 
@@ -33,6 +46,12 @@ export default function ModuleLayout({
                 break;
         }
     }
+
+    useEffect(() => {
+        if (!params.get("tab")) {
+            setParam("tab", "lesson");
+        }
+    }, [params, setParam]);
 
     const [selectedTab, setSelectedTab] = useState(activeTab);
 
