@@ -32,7 +32,7 @@ export default function NumberLinePractice({ mode }: { mode: string }) {
     const rangeGap = 4;
     const responseTime = 1000;
 
-    const setNumbers = () => {
+    const generateExerciseValues = () => {
         let num1 = getRandomNumber(minNumber, maxNumber);
         let num2 = getRandomNumber(minNumber, maxNumber);
 
@@ -73,13 +73,13 @@ export default function NumberLinePractice({ mode }: { mode: string }) {
     };
 
     useEffect(() => {
-        setNumbers();
+        generateExerciseValues();
         setNumbersSet(true);
     }, []);
 
     const resetState = () => {
         setAnswer("");
-        setNumbers();
+        generateExerciseValues();
 
         setSubmitButtonDisabled(false);
         setAnswerInputDisabled(false);
