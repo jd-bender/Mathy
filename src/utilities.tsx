@@ -1,3 +1,5 @@
+import { Typography } from "@mui/material";
+
 const getRandomNumber = (min: number, max: number) => {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -5,4 +7,10 @@ const getRandomNumber = (min: number, max: number) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-export { getRandomNumber };
+const plainTextMapping = (content: string, index: number) => (
+    <Typography mb={2} key={index}>
+        {content}
+    </Typography>
+);
+
+export { getRandomNumber, plainTextMapping };

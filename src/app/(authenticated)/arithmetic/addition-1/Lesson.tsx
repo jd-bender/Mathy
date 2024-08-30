@@ -1,16 +1,11 @@
 import { Typography } from "@mui/material";
 import { pages } from "./LessonContent";
+import { plainTextMapping } from "utilities";
 import NumberLine from "app/components/NumberLine/NumberLine";
 import LessonLayout from "app/components/LessonLayout";
 
 export default function Lesson() {
-    const PlainTextMapping = (content: string, index: number) => (
-        <Typography mb={2} key={index}>
-            {content}
-        </Typography>
-    );
-
-    const Page1 = pages[0].map(PlainTextMapping);
+    const Page1 = pages[0].map(plainTextMapping);
 
     const Page2 = pages[1].map((content, index) => {
         switch (index) {
@@ -53,7 +48,7 @@ export default function Lesson() {
         }
     });
 
-    const Page3 = pages[2].map(PlainTextMapping);
+    const Page3 = pages[2].map(plainTextMapping);
 
     return <LessonLayout pages={[Page1, Page2, Page3]} />;
 }
