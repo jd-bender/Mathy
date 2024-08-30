@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import TabPanel from "app/components/TabPanel";
 import { pages } from "./LessonContent";
 import NumberLine from "app/components/NumberLine/NumberLine";
 
-export default function Lesson({ activePageIndex, setActivePageIndex }) {
+export default function Lesson() {
+    const [activePageIndex, setActivePageIndex] = useState(0);
+
     const goToLastPage = () => {
         setActivePageIndex(
             (oldActivePageIndex: number) => oldActivePageIndex - 1,
