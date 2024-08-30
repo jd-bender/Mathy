@@ -36,7 +36,7 @@ export default function ModuleLayout({
                     </TabList>
                 </Box>
 
-                <Box className="relative flex flex-col grow p-12 mx-96 m-w-96">
+                <Box className="relative flex flex-col items-center p-12 mx-96 m-w-96">
                     <TabPanel value="0" keepMounted>
                         {Lesson}
                     </TabPanel>

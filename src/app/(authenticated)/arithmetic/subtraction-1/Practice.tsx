@@ -1,3 +1,5 @@
+import NumberLinePractice from "app/components/NumberLine/NumberLinePractice";
+
 export default function Practice() {
-    return <></>;
+    return <NumberLinePractice mode="subtraction" />;
 }
