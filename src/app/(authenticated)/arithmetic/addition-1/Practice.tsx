@@ -6,12 +6,7 @@ import { TextField, Button } from "@mui/material";
 import NumberLineContext from "app/components/NumberLine/numberLineContext";
 import NumberLine from "app/components/NumberLine/NumberLine";
 
-export default function Practice({
-    correctAnswerStreak,
-    setCorrectAnswerStreak,
-    showExplanation,
-    setShowExplanation,
-}) {
+export default function Practice() {
     const [number1, setNumber1] = useState(null);
     const [number2, setNumber2] = useState(null);
     const [answer, setAnswer] = useState("");
@@ -19,8 +14,10 @@ export default function Practice({
     const [numberLineRangeStart, setNumberLineRangeStart] = useState(null);
     const [numberLineRangeEnd, setNumberLineRangeEnd] = useState(null);
     const [numbersSet, setNumbersSet] = useState(false);
+    const [showExplanation, setShowExplanation] = useState(false);
     const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
     const [answerInputDisabled, setAnswerInputDisabled] = useState(false);
+    const [correctAnswerStreak, setCorrectAnswerStreak] = useState(0);
     const [showAnswerStatusMessage, setShowAnswerStatusMessage] =
         useState(false);
     const [answerStatusMessage, setAnswerStatusMessage] = useState("Correct!");
@@ -82,7 +79,7 @@ export default function Practice({
 
         if (isCorrect) {
             setCorrectAnswerStreak(
-                (correctAnswerStreak: number) => correctAnswerStreak + 1,
+                (correctAnswerStreak) => correctAnswerStreak + 1,
             );
             setAnswerInputDisabled(true);
         } else {

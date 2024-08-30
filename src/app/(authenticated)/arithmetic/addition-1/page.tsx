@@ -11,9 +11,6 @@ export default function Page() {
 
     const [activeLessonPage, setActiveLessonPage] = useState(0);
 
-    const [correctAnswerStreak, setCorrectAnswerStreak] = useState(0);
-    const [showExplanation, setShowExplanation] = useState(false);
-
     const handleSelectedTabChange = (
         _event: SyntheticEvent,
         newTab: number,
@@ -45,12 +42,7 @@ export default function Page() {
                     />
                 </TabPanel>
                 <TabPanel value={selectedTab} index={1}>
-                    <Practice
-                        correctAnswerStreak={correctAnswerStreak}
-                        setCorrectAnswerStreak={setCorrectAnswerStreak}
-                        showExplanation={showExplanation}
-                        setShowExplanation={setShowExplanation}
-                    />
+                    <Practice />
                 </TabPanel>
             </Box>
         </Box>
