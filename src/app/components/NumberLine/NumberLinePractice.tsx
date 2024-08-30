@@ -15,12 +15,12 @@ export default function NumberLinePractice({ mode }: { mode: string }) {
     const [numberLineRangeEnd, setNumberLineRangeEnd] = useState(null);
     const [numbersSet, setNumbersSet] = useState(false);
     const [showExplanation, setShowExplanation] = useState(false);
-    const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
+    const [buttonsDisabled, setButtonsDisabled] = useState(false);
     const [answerInputDisabled, setAnswerInputDisabled] = useState(false);
     const [correctAnswerStreak, setCorrectAnswerStreak] = useState(0);
     const [showAnswerStatusMessage, setShowAnswerStatusMessage] =
         useState(false);
-    const [answerStatusMessage, setAnswerStatusMessage] = useState("Correct!");
+    const [answerStatusMessage, setAnswerStatusMessage] = useState("");
     const [resetSignal, setResetSignal] = useState(false);
     const [selectedDots, setSelectedDots] = useState(0);
     const [startPosition, setStartPosition] = useState(null);
@@ -81,7 +81,7 @@ export default function NumberLinePractice({ mode }: { mode: string }) {
         setAnswer("");
         generateExerciseValues();
 
-        setSubmitButtonDisabled(false);
+        setButtonsDisabled(false);
         setAnswerInputDisabled(false);
         setShowExplanation(false);
         setResetSignal(true);
@@ -110,7 +110,7 @@ export default function NumberLinePractice({ mode }: { mode: string }) {
 
         setAnswerStatusMessage(message);
         setShowAnswerStatusMessage(true);
-        setSubmitButtonDisabled(true);
+        setButtonsDisabled(true);
 
         if (isCorrect) {
             setCorrectAnswerStreak(
@@ -123,7 +123,7 @@ export default function NumberLinePractice({ mode }: { mode: string }) {
 
         setTimeout(() => {
             setShowAnswerStatusMessage(false);
-            setSubmitButtonDisabled(false);
+            setButtonsDisabled(false);
 
             if (isCorrect) {
                 resetState();
@@ -131,12 +131,18 @@ export default function NumberLinePractice({ mode }: { mode: string }) {
         }, responseTime);
     };
 
+    const triggerShowExplanation = () => {
+        setCorrectAnswerStreak(0);
+        setShowExplanation(!showExplanation);
+    };
+
     return (
         <div className="relative block">
             <div className="mb-3">
                 <Button
                     variant="contained"
-                    onClick={() => setShowExplanation(!showExplanation)}
+                    onClick={triggerShowExplanation}
+                    disabled={buttonsDisabled}
                 >
                     {showExplanation ? "Hide" : "Show"} Explanation
                 </Button>
@@ -194,7 +200,7 @@ export default function NumberLinePractice({ mode }: { mode: string }) {
                 <Button
                     onClick={submitAnswer}
                     variant="contained"
-                    disabled={submitButtonDisabled || !answer}
+                    disabled={buttonsDisabled || !answer}
                 >
                     Submit Answer
                 </Button>
