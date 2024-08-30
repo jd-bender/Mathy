@@ -1,118 +1,95 @@
 import { useState } from "react";
 import { Box, Button, Typography } from "@mui/material";
+import TabPanel from "app/components/TabPanel";
 import { pages } from "./LessonContent";
 import NumberLine from "app/components/NumberLine/NumberLine";
 
 export default function Lesson() {
-    const [lessonStarted, setLessonStarted] = useState(false);
-    const [startButtonDisabled, setStartButtonDisabled] = useState(false);
-    const [hideActivePageContent, setHideActivePageContent] = useState(true);
-    const [activePageContent, setActivePageContent] = useState([]);
+    const [activePageIndex, setActivePageIndex] = useState(0);
 
-    const pageTransitionTime = 1000;
-
-    const startLesson = () => {
-        setStartButtonDisabled(true);
-        setLessonStarted(true);
-
-        setTimeout(() => {
-            populatePage1Content();
-        }, pageTransitionTime);
+    const goToLastPage = () => {
+        setActivePageIndex((oldActivePageIndex) => oldActivePageIndex - 1);
     };
 
-    const populatePage1Content = () => {
-        let currentPageContent = pages[0].map((content, index) => (
-            <Typography mb={2} key={index + 1}>
-                {content}
-            </Typography>
-        ));
-
-        currentPageContent.push(
-            <Button
-                onClick={advanceToNextLessonPage}
-                variant="contained"
-                key={pages[0].length + 1}
-            >
-                Next
-            </Button>,
-        );
-
-        setActivePageContent(currentPageContent);
-        setHideActivePageContent(false);
-    };
-
-    const populatePage2Content = () => {
-        let currentPageContent = pages[1].map((content, index) => {
-            switch (index) {
-                case 1:
-                    return (
-                        <NumberLine
-                            range={[0, 10]}
-                            explanationMode={true}
-                            key={index}
-                            className="mb-2"
-                        />
-                    );
-                case 5:
-                    return (
-                        <NumberLine
-                            range={[0, 10]}
-                            explanationMode={true}
-                            startPosition={3}
-                            key={index}
-                            className="mb-2"
-                        />
-                    );
-                case 7:
-                    return (
-                        <NumberLine
-                            range={[0, 10]}
-                            explanationMode={true}
-                            startPosition={3}
-                            endPosition={8}
-                            key={index}
-                            className="mb-2"
-                        />
-                    );
-                default:
-                    return (
-                        <Typography mb={2} key={index}>
-                            {content}
-                        </Typography>
-                    );
-            }
-        });
-
-        setActivePageContent(currentPageContent);
-        setHideActivePageContent(false);
-    };
-
-    const advanceToNextLessonPage = () => {
-        setHideActivePageContent(true);
-
-        setTimeout(() => {
-            setActivePageContent([]);
-            setHideActivePageContent(false);
-            populatePage2Content();
-        }, pageTransitionTime);
+    const goToNextPage = () => {
+        setActivePageIndex((oldActivePageIndex) => oldActivePageIndex + 1);
     };
 
     return (
-        <Box sx={{ position: "relative", marginX: "20%", minWidth: "768px" }}>
-            <Button
-                className={`${lessonStarted ? "opacity-0" : "opacity-100 z-10"} transition-opacity ease-in-out duration-1000`}
-                onClick={startLesson}
-                variant="contained"
-                disabled={startButtonDisabled}
-            >
-                Start Lesson
-            </Button>
+        <Box className="relative flex flex-col grow p-12 mx-96 m-w-96">
+            <TabPanel value={activePageIndex} index={0}>
+                {pages[0].map((content, index) => (
+                    <Typography mb={2} key={index}>
+                        {content}
+                    </Typography>
+                ))}
+            </TabPanel>
+            <TabPanel value={activePageIndex} index={1}>
+                {pages[1].map((content, index) => {
+                    switch (index) {
+                        case 1:
+                            return (
+                                <NumberLine
+                                    range={[0, 10]}
+                                    explanationMode={true}
+                                    key={index}
+                                    className="mb-2"
+                                />
+                            );
+                        case 5:
+                            return (
+                                <NumberLine
+                                    range={[0, 10]}
+                                    explanationMode={true}
+                                    startPosition={3}
+                                    key={index}
+                                    className="mb-2"
+                                />
+                            );
+                        case 7:
+                            return (
+                                <NumberLine
+                                    range={[0, 10]}
+                                    explanationMode={true}
+                                    startPosition={3}
+                                    endPosition={8}
+                                    key={index}
+                                    className="mb-2"
+                                />
+                            );
+                        default:
+                            return (
+                                <Typography mb={2} key={index}>
+                                    {content}
+                                </Typography>
+                            );
+                    }
+                })}
+            </TabPanel>
+            <TabPanel value={activePageIndex} index={2}>
+                {pages[2].map((content, index) => (
+                    <Typography mb={2} key={index}>
+                        {content}
+                    </Typography>
+                ))}
+            </TabPanel>
 
-            <span
-                className={`${hideActivePageContent ? "opacity-0" : "opacity-100"} transition-opacity ease-in-out duration-1000 absolute top-0 left-0`}
-            >
-                {activePageContent}
-            </span>
+            <Box className="flex justify-between">
+                <Button
+                    onClick={goToLastPage}
+                    variant="contained"
+                    disabled={activePageIndex === 0}
+                >
+                    Back
+                </Button>
+                <Button
+                    onClick={goToNextPage}
+                    variant="contained"
+                    disabled={activePageIndex === pages.length - 1}
+                >
+                    Next
+                </Button>
+            </Box>
         </Box>
     );
 }

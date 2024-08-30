@@ -16,4 +16,8 @@ export const pages = [
         "[number line with 3 and 8 selected]",
         "After moving 5 places to the right, we arrive at 8, which is the solution to our problem.",
     ],
+    [
+        "In the practice section for this module, you will have your own number line to use to help with solving these problems.",
+        "Once you can solve five problems in a row, you will be ready for the next section.",
+    ],
 ];
