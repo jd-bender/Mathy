@@ -51,7 +51,7 @@ export default function ModuleLayout({ Lesson, Practice }) {
                     </TabList>
                 </div>
 
-                <div className="relative mx-72 flex flex-1 h-full overflow-y-auto">
+                <div className="relative mx-96 flex flex-1 h-full overflow-y-auto">
                     <TabPanel value="0" keepMounted>
                         <Lesson
                             activePageIndex={activeLessonPageIndex}
