@@ -2,7 +2,7 @@
 import { useState, useEffect, SyntheticEvent, ReactNode } from "react";
 import { Tab, Box } from "@mui/material";
 import { TabPanel, TabList, TabContext } from "@mui/lab";
-import useQueryParams from "./useQueryParams";
+import useQueryParams from "../hooks/useQueryParams";
 
 export default function ModuleLayout({
     Lesson,

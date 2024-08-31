@@ -2,7 +2,7 @@
 import { ReactNode, useState, useEffect } from "react";
 import { Box, Button } from "@mui/material";
 import TabPanel from "app/components/TabPanel";
-import useQueryParams from "./useQueryParams";
+import useQueryParams from "../hooks/useQueryParams";
 
 export default function LessonLayout({ pages }) {
     const [params, setParam] = useQueryParams();
