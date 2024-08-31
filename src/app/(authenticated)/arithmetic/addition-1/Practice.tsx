@@ -1,4 +1,4 @@
-import NumberLinePractice from "app/components/NumberLine/NumberLinePractice";
+import NumberLinePractice from "components/NumberLine/NumberLinePractice";
 
 export default function Practice() {
     return <NumberLinePractice mode="addition" />;

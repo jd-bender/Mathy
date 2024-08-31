@@ -1,8 +1,8 @@
 import { Typography } from "@mui/material";
 import { pages } from "./LessonContent";
 import { plainTextMapping } from "utilities";
-import NumberLine from "app/components/NumberLine/NumberLine";
-import LessonLayout from "app/components/LessonLayout";
+import NumberLine from "components/NumberLine/NumberLine";
+import LessonLayout from "components/LessonLayout";
 
 export default function Lesson() {
     const Page1 = pages[0].map(plainTextMapping);

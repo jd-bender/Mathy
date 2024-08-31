@@ -3,8 +3,8 @@ import { useState, useCallback, useEffect } from "react";
 import { getRandomNumber } from "utilities";
 import { TextField, Button } from "@mui/material";
 
-import NumberLineContext from "app/components/NumberLine/numberLineContext";
-import NumberLine from "app/components/NumberLine/NumberLine";
+import NumberLineContext from "components/NumberLine/numberLineContext";
+import NumberLine from "components/NumberLine/NumberLine";
 
 export default function NumberLinePractice({ mode }: { mode: string }) {
     const [number1, setNumber1] = useState(null);

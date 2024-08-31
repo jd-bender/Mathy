@@ -1,6 +1,6 @@
 import { plainTextMapping } from "utilities";
 import { pages } from "./LessonContent";
-import LessonLayout from "app/components/LessonLayout";
+import LessonLayout from "components/LessonLayout";
 
 export default function Lesson() {
     const Page1 = pages[0].map(plainTextMapping);

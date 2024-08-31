@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useContext } from "react";
-import NumberLineContext from "app/components/NumberLine/numberLineContext";
+import NumberLineContext from "components/NumberLine/numberLineContext";
 
 type DotProps = {
     explanationMode: boolean;
