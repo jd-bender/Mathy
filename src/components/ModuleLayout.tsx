@@ -42,16 +42,16 @@ export default function ModuleLayout({ Lesson, Practice }) {
     };
 
     return (
-        <div className="w-full">
+        <div className="w-full flex flex-col">
             <TabContext value={selectedTab}>
-                <div className="border-b border-neutral-300 flex justify-center fixed top-16 w-full h-12">
+                <div className="border-b border-neutral-300 flex justify-center h-12">
                     <TabList onChange={handleSelectedTabChange}>
                         <Tab label="Lesson" value="0" />
                         <Tab label="Practice" value="1" />
                     </TabList>
                 </div>
 
-                <div className="relative flex flex-col items-center mx-96 mt-28 m-w-96">
+                <div className="relative mx-72 flex flex-1 h-full overflow-y-auto">
                     <TabPanel value="0" keepMounted>
                         <Lesson
                             activePageIndex={activeLessonPageIndex}
