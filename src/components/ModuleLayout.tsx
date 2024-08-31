@@ -1,16 +1,9 @@
-"use client";
-import { useState, useEffect, SyntheticEvent, ReactNode } from "react";
+import { useState, useEffect, SyntheticEvent } from "react";
 import { Tab, Box } from "@mui/material";
 import { TabPanel, TabList, TabContext } from "@mui/lab";
 import useQueryParams from "../hooks/useQueryParams";
 
-export default function ModuleLayout({
-    Lesson,
-    Practice,
-}: {
-    Lesson: ReactNode;
-    Practice: ReactNode;
-}) {
+export default function ModuleLayout({ Lesson, Practice }) {
     const [params, setParam, deleteParam] = useQueryParams();
 
     let activeTab = "0";
@@ -66,10 +59,10 @@ export default function ModuleLayout({
 
                 <Box className="relative flex flex-col items-center p-12 mx-96 m-w-96">
                     <TabPanel value="0" keepMounted>
-                        {Lesson}
+                        <Lesson />
                     </TabPanel>
                     <TabPanel value="1" keepMounted>
-                        {Practice}
+                        <Practice />
                     </TabPanel>
                 </Box>
             </TabContext>
