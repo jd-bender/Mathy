@@ -5,13 +5,13 @@ import Link from "next/link";
 export default function DashboardLayout({ children }: IParent) {
     return (
         <Box>
-            <Box className="w-full h-16 flex justify-center items-center bg-palette-1">
+            <Box className="fixed top-0 w-full h-16 flex justify-center items-center bg-palette-1">
                 <Link href="/" className="text-3xl font-medium">
                     Mathy
                 </Link>
             </Box>
 
-            <Box>{children}</Box>
+            <Box className="mt-16">{children}</Box>
         </Box>
     );
 }

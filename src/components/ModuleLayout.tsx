@@ -50,6 +50,8 @@ export default function ModuleLayout({ Lesson, Practice }) {
                         borderColor: "divider",
                         display: "flex",
                         justifyContent: "center",
+                        position: "fixed",
+                        width: "100%",
                     }}
                 >
                     <TabList onChange={handleSelectedTabChange}>
