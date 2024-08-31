@@ -1,25 +1,11 @@
 "use client";
-import { ReactNode, useState, useMemo, useCallback, useEffect } from "react";
+import { ReactNode, useState, useEffect } from "react";
 import { Box, Button } from "@mui/material";
 import TabPanel from "app/components/TabPanel";
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import useQueryParams from "./useQueryParams";
 
 export default function LessonLayout({ pages }) {
-    const router = useRouter();
-    const pathname = usePathname();
-    const searchParams = useSearchParams();
-    const params = useMemo(
-        () => new URLSearchParams(searchParams),
-        [searchParams],
-    );
-
-    const setParam = useCallback(
-        (name: string, value: string) => {
-            params.set(name, value);
-            router.push(pathname + "?" + params.toString());
-        },
-        [params, pathname, router],
-    );
+    const [params, setParam] = useQueryParams();
 
     let activePage = 0;
 
