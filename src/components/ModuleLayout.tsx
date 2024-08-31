@@ -42,7 +42,7 @@ export default function ModuleLayout({ Lesson, Practice }) {
     };
 
     return (
-        <div className="w-full flex flex-col">
+        <div className="w-full flex flex-col flex-grow">
             <TabContext value={selectedTab}>
                 <div className="border-b border-neutral-300 flex justify-center h-12">
                     <TabList onChange={handleSelectedTabChange}>

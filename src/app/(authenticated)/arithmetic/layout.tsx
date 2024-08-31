@@ -5,7 +5,7 @@ import { Button } from "@mui/material";
 export default function ArithmeticLayout({ children }: IParent) {
     return (
         <>
-            <div>{children}</div>
+            <div className="flex">{children}</div>
 
             <Link href="/" className="fixed bottom-4 right-4">
                 <Button variant="contained">Return</Button>
