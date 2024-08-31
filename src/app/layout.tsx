@@ -1,7 +1,7 @@
 import "../globals.css";
-import { ReactNode } from "react";
+import { IParent } from "interfaces";
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children }: IParent) {
     return (
         <html lang="en">
             <head>

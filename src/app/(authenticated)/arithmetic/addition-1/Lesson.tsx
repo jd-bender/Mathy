@@ -1,10 +1,14 @@
+import { ILesson } from "interfaces";
 import { Typography } from "@mui/material";
 import { pages } from "./LessonContent";
 import { plainTextMapping } from "utilities";
 import NumberLine from "components/NumberLine/NumberLine";
 import LessonLayout from "components/LessonLayout";
 
-export default function Lesson({ activePageIndex, setActivePageIndex }) {
+export default function Lesson({
+    activePageIndex,
+    setActivePageIndex,
+}: ILesson) {
     const Page1 = pages[0].map(plainTextMapping);
 
     const Page2 = pages[1].map((content, index) => {

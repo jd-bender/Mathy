@@ -1,12 +1,8 @@
-import { ReactNode } from "react";
+import { IParent } from "interfaces";
 import Link from "next/link";
 import { Button } from "@mui/material";
 
-export default function ArithmeticLayout({
-    children,
-}: {
-    children: ReactNode;
-}) {
+export default function ArithmeticLayout({ children }: IParent) {
     return (
         <>
             <div>{children}</div>

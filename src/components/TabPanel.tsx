@@ -1,12 +1,11 @@
-import { ReactNode } from "react";
+import { IParent } from "interfaces";
 
-interface TabPanelProps {
-    children: ReactNode;
+interface ITabPanel extends IParent {
     index: number;
     value: number;
 }
 
-export default function TabPanel({ children, index, value }: TabPanelProps) {
+export default function TabPanel({ children, index, value }: ITabPanel) {
     return (
         <div role="tabpanel" hidden={value !== index}>
             {value === index && children}
