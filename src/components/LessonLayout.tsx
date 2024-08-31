@@ -1,6 +1,6 @@
 "use client";
 import { ReactNode, useEffect } from "react";
-import { Box, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import TabPanel from "components/TabPanel";
 import useQueryParams from "../hooks/useQueryParams";
 
@@ -43,7 +43,7 @@ export default function LessonLayout({
                 </TabPanel>
             ))}
 
-            <Box className="flex justify-between">
+            <div className="flex justify-between">
                 <Button
                     onClick={goToLastPage}
                     variant="contained"
@@ -58,7 +58,7 @@ export default function LessonLayout({
                 >
                     Next
                 </Button>
-            </Box>
+            </div>
         </>
     );
 }

@@ -1,5 +1,5 @@
 import { useState, useEffect, SyntheticEvent } from "react";
-import { Tab, Box } from "@mui/material";
+import { Tab } from "@mui/material";
 import { TabPanel, TabList, TabContext } from "@mui/lab";
 import useQueryParams from "../hooks/useQueryParams";
 
@@ -42,25 +42,16 @@ export default function ModuleLayout({ Lesson, Practice }) {
     };
 
     return (
-        <Box sx={{ width: "100%" }}>
+        <div className="w-full">
             <TabContext value={selectedTab}>
-                <Box
-                    sx={{
-                        borderBottom: 1,
-                        borderColor: "divider",
-                        display: "flex",
-                        justifyContent: "center",
-                        position: "fixed",
-                        width: "100%",
-                    }}
-                >
+                <div className="border-b border-neutral-300 flex justify-center fixed top-16 w-full h-12">
                     <TabList onChange={handleSelectedTabChange}>
                         <Tab label="Lesson" value="0" />
                         <Tab label="Practice" value="1" />
                     </TabList>
-                </Box>
+                </div>
 
-                <Box className="relative flex flex-col items-center p-12 mx-96 m-w-96">
+                <div className="relative flex flex-col items-center mx-96 mt-28 m-w-96">
                     <TabPanel value="0" keepMounted>
                         <Lesson
                             activePageIndex={activeLessonPageIndex}
@@ -70,8 +61,8 @@ export default function ModuleLayout({ Lesson, Practice }) {
                     <TabPanel value="1" keepMounted>
                         <Practice />
                     </TabPanel>
-                </Box>
+                </div>
             </TabContext>
-        </Box>
+        </div>
     );
 }
