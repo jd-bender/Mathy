@@ -11,15 +11,15 @@ export default function LessonLayout({
 }) {
     const [params, setParam] = useQueryParams();
 
-    if (params.get("page")) {
-        setActivePageIndex(Number(params.get("page")));
-    }
-
     useEffect(() => {
+        if (params.get("page")) {
+            setActivePageIndex(Number(params.get("page")));
+        }
+
         if (params.get("tab") === "lesson" && !params.get("page")) {
             setParam("page", activePageIndex);
         }
-    }, [params, setParam, activePageIndex]);
+    }, [params, setParam, activePageIndex, setActivePageIndex]);
 
     const goToLastPage = () => {
         setParam("page", String(activePageIndex - 1));
