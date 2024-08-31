@@ -1,25 +1,25 @@
 "use client";
-import { ReactNode, useState, useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 import { Box, Button } from "@mui/material";
 import TabPanel from "components/TabPanel";
 import useQueryParams from "../hooks/useQueryParams";
 
-export default function LessonLayout({ pages }) {
+export default function LessonLayout({
+    pages,
+    activePageIndex,
+    setActivePageIndex,
+}) {
     const [params, setParam] = useQueryParams();
 
-    let activePage = 0;
-
     if (params.get("page")) {
-        activePage = Number(params.get("page"));
+        setActivePageIndex(Number(params.get("page")));
     }
 
     useEffect(() => {
         if (params.get("tab") === "lesson" && !params.get("page")) {
-            setParam("page", "0");
+            setParam("page", activePageIndex);
         }
-    }, [params, setParam]);
-
-    const [activePageIndex, setActivePageIndex] = useState(activePage);
+    }, [params, setParam, activePageIndex]);
 
     const goToLastPage = () => {
         setParam("page", String(activePageIndex - 1));

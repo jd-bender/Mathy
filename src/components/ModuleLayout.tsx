@@ -26,6 +26,7 @@ export default function ModuleLayout({ Lesson, Practice }) {
     }, [params, setParam]);
 
     const [selectedTab, setSelectedTab] = useState(activeTab);
+    const [activeLessonPageIndex, setActiveLessonPageIndex] = useState(0);
 
     const handleSelectedTabChange = (
         _event: SyntheticEvent,
@@ -59,7 +60,10 @@ export default function ModuleLayout({ Lesson, Practice }) {
 
                 <Box className="relative flex flex-col items-center p-12 mx-96 m-w-96">
                     <TabPanel value="0" keepMounted>
-                        <Lesson />
+                        <Lesson
+                            activePageIndex={activeLessonPageIndex}
+                            setActivePageIndex={setActiveLessonPageIndex}
+                        />
                     </TabPanel>
                     <TabPanel value="1" keepMounted>
                         <Practice />
