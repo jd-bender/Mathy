@@ -3,7 +3,7 @@ import { IParent } from "interfaces";
 
 export default function RootLayout({ children }: IParent) {
     return (
-        <html lang="en">
+        <html lang="en" className="h-full">
             <head>
                 <title>Mathy</title>
             </head>
