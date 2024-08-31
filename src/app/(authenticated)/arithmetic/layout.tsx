@@ -11,7 +11,7 @@ export default function ArithmeticLayout({
         <>
             <div>{children}</div>
 
-            <Link href="/" className="absolute bottom-4 right-4">
+            <Link href="/" className="fixed bottom-4 right-4">
                 <Button variant="contained">Return</Button>
             </Link>
         </>
