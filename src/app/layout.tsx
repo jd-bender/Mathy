@@ -7,9 +7,7 @@ export default function RootLayout({ children }: IParent) {
             <head>
                 <title>Mathy</title>
             </head>
-            <body className="bg-palette-2 flex flex-col h-screen">
-                {children}
-            </body>
+            <body className="bg-palette-2 flex flex-col">{children}</body>
         </html>
     );
 }
