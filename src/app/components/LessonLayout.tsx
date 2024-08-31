@@ -14,7 +14,7 @@ export default function LessonLayout({ pages }) {
     }
 
     useEffect(() => {
-        if (!params.get("page")) {
+        if (params.get("tab") === "lesson" && !params.get("page")) {
             setParam("page", "0");
         }
     }, [params, setParam]);

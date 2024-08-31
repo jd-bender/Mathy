@@ -18,6 +18,18 @@ export default function useParams() {
         [params, pathname, router],
     );
 
-    const vals: [URLSearchParams, Function] = [params, setParam];
+    const deleteParam = useCallback(
+        (name: string) => {
+            params.delete(name);
+            router.push(pathname + "?" + params.toString());
+        },
+        [params, pathname, router],
+    );
+
+    const vals: [URLSearchParams, Function, Function] = [
+        params,
+        setParam,
+        deleteParam,
+    ];
     return vals;
 }

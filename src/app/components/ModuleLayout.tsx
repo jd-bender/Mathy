@@ -11,7 +11,7 @@ export default function ModuleLayout({
     Lesson: ReactNode;
     Practice: ReactNode;
 }) {
-    const [params, setParam] = useQueryParams();
+    const [params, setParam, deleteParam] = useQueryParams();
 
     let activeTab = "0";
 
@@ -39,6 +39,11 @@ export default function ModuleLayout({
         newTab: string,
     ) => {
         setParam("tab", newTab === "0" ? "lesson" : "practice");
+
+        if (newTab === "1") {
+            deleteParam("page");
+        }
+
         setSelectedTab(newTab);
     };
 
