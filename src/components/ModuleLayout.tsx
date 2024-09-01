@@ -51,7 +51,7 @@ export default function ModuleLayout({ Lesson, Practice }) {
                     </TabList>
                 </div>
 
-                <div className="relative px-96 flex-1 overflow-y-auto">
+                <div className="relative px-80 flex-1 overflow-y-auto">
                     <TabPanel value="0" keepMounted sx={{ overflowY: "auto" }}>
                         <Lesson
                             activePageIndex={activeLessonPageIndex}
