@@ -59,7 +59,9 @@ export default function ModuleLayout({ Lesson, Practice }) {
                         />
                     </TabPanel>
                     <TabPanel value="1" keepMounted>
-                        <Practice />
+                        <div className="flex justify-center">
+                            <Practice />
+                        </div>
                     </TabPanel>
                 </div>
             </TabContext>
