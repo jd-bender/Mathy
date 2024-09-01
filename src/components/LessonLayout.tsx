@@ -43,22 +43,21 @@ export default function LessonLayout({
                 </TabPanel>
             ))}
 
-            <div className="flex justify-between">
-                <Button
-                    onClick={goToLastPage}
-                    variant="contained"
-                    disabled={activePageIndex === 0}
-                >
-                    Back
-                </Button>
-                <Button
-                    onClick={goToNextPage}
-                    variant="contained"
-                    disabled={activePageIndex === pages.length - 1}
-                >
-                    Next
-                </Button>
-            </div>
+            <Button
+                onClick={goToLastPage}
+                variant="contained"
+                hidden={activePageIndex === 0}
+            >
+                Back
+            </Button>
+            <Button
+                onClick={goToNextPage}
+                variant="contained"
+                hidden={activePageIndex === pages.length - 1}
+                className="float-right"
+            >
+                Next
+            </Button>
         </>
     );
 }
