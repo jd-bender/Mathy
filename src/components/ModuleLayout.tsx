@@ -42,7 +42,7 @@ export default function ModuleLayout({ Lesson, Practice }) {
     };
 
     return (
-        <div className="flex flex-col">
+        <>
             <TabContext value={selectedTab}>
                 <div className="border-b border-neutral-300 flex justify-center h-12">
                     <TabList onChange={handleSelectedTabChange}>
@@ -51,8 +51,8 @@ export default function ModuleLayout({ Lesson, Practice }) {
                     </TabList>
                 </div>
 
-                <div className="relative mx-96 flex flex-1 overflow-y-auto">
-                    <TabPanel value="0" keepMounted>
+                <div className="relative px-96 flex-1 overflow-y-auto">
+                    <TabPanel value="0" keepMounted sx={{ overflowY: "auto" }}>
                         <Lesson
                             activePageIndex={activeLessonPageIndex}
                             setActivePageIndex={setActiveLessonPageIndex}
@@ -63,6 +63,6 @@ export default function ModuleLayout({ Lesson, Practice }) {
                     </TabPanel>
                 </div>
             </TabContext>
-        </div>
+        </>
     );
 }
